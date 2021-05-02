@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nurse schedule</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    
+    <h1>Nurse scheduling tool</h1>
+    <div id="viewnav">
+        <button onclick="()=>{}">Wards view</button>
+        <button onclick="()=>{}">Nurse view</button>
+        <button onclick="()=>{}">Ward edit</button>
+        <button onclick="()=>{}">Nurse edit</button>
+        <button onclick="()=>{}">Print schedule</button>
+    </div>
+    
+    <div style="border:solid 2px black; width:99%; padding:2px;" >
+        
+        <!-- CONTENT  -->
+        <div style="float:left;width:70%;">
+            <div id="content">
+                <script type="text/javascript">
+                    
+                </script>
+                <p>Drag the nurses into wards:</p>
+                
+                
+                
+                Ward1 <div id="ward1" ondrop="drop(event)" ondragover="allowDrop(event)" class ="ward"></div>
+                Ward2 <div id="ward2" ondrop="drop(event)" ondragover="allowDrop(event)" class ="ward"></div>
+                <br>
+                
+            </div>
+        </div>
+        
+        
+        <div style="float:left;width:20%;">
+            Unalloted
+            <div id="unalloted" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <!-- <img id="drag1" src="img_logo.gif" draggable="true" ondragstart="drag(event)" width="336" height="69"> -->
+            <!-- <div id="drag1" draggable="true" ondragstart="drag(event)" class="nurse" >item</div> -->
+            
+        </div>
+    </div>
+    
+    <script src="./main.js" type="text/javascript"></script> 
+    <br>
+    <!-- Fetching data from txt files -->
+    <!-- <script>
+        var nurselist;
+        fetch('./nurselist.txt')
+        .then(response => response.text())
+        .then(text => {nurselist=text;
+            console.log({nurselist});
+            // for(let i=0;i<nurselist.length;i++){
+                //     console.log(nurselist[i])
+                // 
+            }
+            )
+        </script> -->
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <!-- CODE FOR DOWNLOADING TO CSV -->
+        <!-- <script>
+            var data = [
+            ['Foo', 'programmer'],
+            ['Bar', 'bus driver'],
+            ['Moo', 'Reindeer Hunter']
+            ];
+            
+            
+            function download_csv() {
+                var csv = 'Name,Title\n';
+                data.forEach(function(row) {
+                    csv += row.join(',');
+                    csv += "\n";
+                });
+                
+                console.log(csv);
+                var hiddenElement = document.createElement('a');
+                hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+                hiddenElement.target = '_blank';
+                hiddenElement.download = 'people.csv';
+                hiddenElement.click();
+            }
+        </script>
+        <br>
+        <br>
+        <br>
+        <button onclick="download_csv()">Download CSV</button>  -->
+        
+        
+        <!-- UPLOAD BUTTON -->
+        <!-- <form action="/action_page.php">
+            <input type="file" id="myFile" name="filename">
+            <input type="submit">
+        </form> -->
+        
+    </body>
+    </html>
