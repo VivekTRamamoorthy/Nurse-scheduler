@@ -12,7 +12,7 @@ var wardsview=function(){
     var column2=document.getElementById("column2")
     column2.innerHTML="Unallocated <br>";
     var unalloted=document.createElement("div");
-    unalloted.id="unalloted";
+    unalloted.id="ward0";
     unalloted.innerHTML=""
     unalloted.ondrop=function(event){drop(event)};
     unalloted.ondragover=function(event){allowDrop(event)};
@@ -45,12 +45,24 @@ var wardsview=function(){
             drop(event);
         };
         wardbox.addEventListener('touchstart',function(event){
+            let targetId=event.target.id;
+            if(touchedElementId.substr(0,5)=="nurse" && targetId.substr(0,4)=="ward"){
             console.log(event)
             console.log("A touch event has occured on a ward")
             event.preventDefault();
             // let touchedId = event.dataTransfer.getData("text");
-            console.log(touchedElementId);
+            // console.log(touchedElementId);
             event.target.appendChild(document.getElementById(touchedElementId));
+
+            console.log(targetId);
+            let wardNo=parseInt(targetId.substring(4));
+            console.log({wardNo})
+            let nurseNo=parseInt(touchedElementId.substring(5));
+            nurses[nurseNo].allotment=wardNo;
+            console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
+            touchedElementId="nothing";
+            }   
+
 
         })
 
@@ -68,7 +80,7 @@ var wardsview=function(){
         //     nurses[i]=new Nurse(10000+i,nurseNames[i]);
         // }
         var nursediv;
-        var unalloted=document.getElementById("unalloted");
+        var unalloted=document.getElementById("ward0");
         for(let i=0;i<nurses.length;i++){
             nursediv=document.createElement("div");
             nursediv.innerText=nurses[i].name;
@@ -88,8 +100,13 @@ var wardsview=function(){
                     touchedElementId= event.target.id;
                     console.log("Touched element is:"+touchedElementId);
                 });
-                unalloted.appendChild(nursediv);
-            }
+            let allocatedWardForNurse=document.getElementById("ward"+nurses[i].allotment)
+            console.log("ward"+nurses[i].allotment)
+            allocatedWardForNurse.appendChild(nursediv);
         }
+    }
+
+
+
 
 

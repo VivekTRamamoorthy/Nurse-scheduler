@@ -9,7 +9,7 @@ var wardNames=["unalloted","ward I day shift",
 var nurseNames=["bharathi", "hema","esther",]
 var allotmentTable=new Array(wardNames.length).fill(new Array(nurseNames.length).fill(0));
 var unalloted=new Array(nurseNames.length).fill(1);
-var touchedElementId;
+var touchedElementId="nothing";
 
 
 // Ward class
