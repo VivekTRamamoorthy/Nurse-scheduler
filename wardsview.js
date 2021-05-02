@@ -106,6 +106,38 @@ var wardsview=function(){
         }
     }
 
+      
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+    
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+        console.log(ev.dataTransfer.getData("text"));
+        touchedElementId= ev.target.id;
+        console.log("Touched element is:"+touchedElementId);
+
+        
+    }
+    
+    function drop(ev) {
+        ev.preventDefault();
+        let targetId=ev.target.id;
+        let touchedId = ev.dataTransfer.getData("text");
+        if(touchedId.substr(0,5)=="nurse" && targetId.substr(0,4)=="ward"){
+        console.log({touchedId})
+        ev.target.appendChild(document.getElementById(touchedId));
+
+        let wardNo=parseInt(targetId.substring(4));
+        let nurseNo=parseInt(touchedElementId.substring(5));
+        nurses[nurseNo].allotment=wardNo;
+        console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
+        }
+    
+    }
+    
+    
+
 
 
 
