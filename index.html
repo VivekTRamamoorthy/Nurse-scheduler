@@ -10,7 +10,7 @@
 <body>
     
     <h1>Nurse scheduling tool</h1>
-    <div id="viewnav">
+    <div id="viewnav" class="row">
         <button onclick="()=>{}">Wards view</button>
         <button onclick="()=>{}">Nurse view</button>
         <button onclick="()=>{}">Ward edit</button>
@@ -18,37 +18,33 @@
         <button onclick="()=>{}">Print schedule</button>
     </div>
     
-    <div style="border:solid 2px black; width:99%; padding:2px;" >
-        
+
+    <div class="row" style="border:solid 2px black; width:99%; padding:2px;">
         <!-- CONTENT  -->
-        <div style="float:left;width:70%;">
-            <div id="content">
-                <script type="text/javascript">
-                    
-                </script>
+        <div class="column" style="width:70%">
+
+            Schedule <br>
+            <div id="content" >
                 <p>Drag the nurses into wards:</p>
-                
-                
-                
-                Ward1 <div id="ward1" ondrop="drop(event)" ondragover="allowDrop(event)" class ="ward"></div>
-                Ward2 <div id="ward2" ondrop="drop(event)" ondragover="allowDrop(event)" class ="ward"></div>
-                <br>
-                
+
+                <div class="warddiv">Ward1 <div id="ward1" ondrop="drop(event)" ondragover="allowDrop(event)" class ="wardbox"></div> </div>
+                <div class="warddiv"> Ward2 <div id="ward2" ondrop="drop(event)" ondragover="allowDrop(event)" class ="wardbox"></div> </div>
+
             </div>
+
         </div>
-        
-        
-        <div style="float:left;width:20%;">
-            Unalloted
-            <div id="unalloted" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-            <!-- <img id="drag1" src="img_logo.gif" draggable="true" ondragstart="drag(event)" width="336" height="69"> -->
-            <!-- <div id="drag1" draggable="true" ondragstart="drag(event)" class="nurse" >item</div> -->
             
+        <!-- UNALLOTED     -->
+        <div class="column" style="width:25%">
+            <!-- <center> -->
+            Unalloted <br>
+            <div id="unalloted"  ondrop="drop(event)" ondragover="allowDrop(event)" ></div>
+        <!-- </center> -->
         </div>
     </div>
     
     <script src="./main.js" type="text/javascript"></script> 
-    <br>
+
     <!-- Fetching data from txt files -->
     <!-- <script>
         var nurselist;

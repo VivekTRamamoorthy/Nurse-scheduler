@@ -4,22 +4,19 @@
 
 var wardNames=["ward I day shift",
 "ward I afternoon shift",
-"ward I night shift"];
+"ward I night shift",
+"ward I ground floor morning shift"];
 var nurseNames=["bharathi", "hema","esther",]
 var allotmentTable=new Array(wardNames.length).fill(new Array(nurseNames.length).fill(0));
 var unalloted=new Array(nurseNames.length).fill(1);
+var touchedElementId;
 
 // Ward class
 
 var Ward=function(name){
     this.name=name;
-
+    this.id=null;
     this.allotment=[];
-    this.set=function(property,value){
-        if (property=="phone"){
-            this.phone=value;
-        }
-    }
     this.update=function(){
 
     }
@@ -35,10 +32,22 @@ for(let i=0;i<wardNames.length;i++){
 
     warddiv=document.createElement("div");
     warddiv.innerText=wards[i].name;
-    warddiv.classList.add("ward");
+    warddiv.classList.add("warddiv")
+    br=document.createElement("br");
+    warddiv.appendChild(br);
+    wardbox=document.createElement("div");
 
-    warddiv.id="ward"+i.toString();
-    warddiv.ondragover=function(event){ event.preventDefault();};
+    wardbox.classList.add("wardbox");
+
+
+    wardbox.id="ward"+i.toString();
+    wards[i].id=warddiv.id;
+    wardbox.ondragover=function(event){ event.preventDefault();};
+    wardbox.ondrop=function(event){ event.preventDefault();
+        var data = event.dataTransfer.getData("text");
+        console.log({data})
+        event.target.appendChild(document.getElementById(data));};
+    warddiv.appendChild(wardbox);
     content.appendChild(warddiv);
 }
 // Ward1 <div id="ward1" ondrop="drop(event)" ondragover="allowDrop(event)" class ="ward"></div>
@@ -70,7 +79,9 @@ for(let i=0;i<nurseNames.length;i++){
 // Adding nurse elements
 var nursediv;
 
-var unalloted=document.getElementById("unalloted")
+var unalloted=document.getElementById("unalloted");
+
+
 for(let i=1;i<nurses.length;i++){
 
 
@@ -82,12 +93,29 @@ for(let i=1;i<nurses.length;i++){
     nursediv.ondragstart=function(event){
         event.dataTransfer.setData("text", event.target.id);
     };
+
+    nursediv.addEventListener('touchstart',function(event){
+    a=event.target.id;
+    if (a[0]+a[1]+a[2]+a[3]+a[4]=="nurse"){
+    event.preventDefault();}
+    // console.log(event)
+    touchedElementId= event.target.id;
+    console.log(touchedElementId);
+});
     unalloted.appendChild(nursediv);
 
     // adding hover text
 
 }
 
+// document.addEventListener('touchstart',function(event){
+//     a=event.target.id;
+//     if (a[0]+a[1]+a[2]+a[3]+a[4]=="nurse"){
+//     event.preventDefault();}
+//     console.log(event)
+//     touchedElementId= event.target.id;
+//     console.log(touchedElementId);
+// });
 
 // Drag and drop options
 
