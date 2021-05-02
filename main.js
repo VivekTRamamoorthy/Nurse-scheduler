@@ -2,7 +2,7 @@
 
 
 
-var wardNames=["ward I day shift",
+var wardNames=["unalloted","ward I day shift",
 "ward I afternoon shift",
 "ward I night shift",
 "ward I ground floor morning shift"];
@@ -10,6 +10,7 @@ var nurseNames=["bharathi", "hema","esther",]
 var allotmentTable=new Array(wardNames.length).fill(new Array(nurseNames.length).fill(0));
 var unalloted=new Array(nurseNames.length).fill(1);
 var touchedElementId;
+
 
 // Ward class
 
@@ -28,13 +29,24 @@ var Nurse=function(roll,name,phone="00000"){
     this.roll=roll;
     this.name=name;
     this.phone=phone;
-    this.shift="null"
+    this.allotment=0;
     this.set=function(property,value){
         if (property=="phone"){
             this.phone=value;
         }
     }
 }
+
+  // adding wards
+  var wards=[];
+  for(let i=0;i<wardNames.length;i++){
+      wards[i]=new Ward(wardNames[i]);
+  }
+
+  var nurses=[];
+  for(let i=0;i<nurseNames.length;i++){
+      nurses[i]=new Nurse(10000+i,nurseNames[i]);
+  }
 
 // // WARDS VIEW
 // var wardsview=function(){
@@ -92,6 +104,7 @@ var Nurse=function(roll,name,phone="00000"){
 //             nursediv.id="nurse"+i.toString();
 //             nursediv.ondragstart=function(event){
 //                 event.dataTransfer.setData("text", event.target.id);
+// touchedElementId= event.target.id;
 //             };
 //             // For mobile
 //             nursediv.addEventListener('touchstart',function(event){
@@ -113,15 +126,25 @@ var Nurse=function(roll,name,phone="00000"){
         
         function drag(ev) {
             ev.dataTransfer.setData("text", ev.target.id);
-            console.log(ev.dataTransfer.getData("text"))
+            console.log(ev.dataTransfer.getData("text"));
+            touchedElementId= ev.target.id;
+            console.log("Touched element is:"+touchedElementId);
+
             
         }
         
         function drop(ev) {
             ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            console.log({data})
-            ev.target.appendChild(document.getElementById(data));
+            let touchedId = ev.dataTransfer.getData("text");
+            console.log({touchedId})
+            ev.target.appendChild(document.getElementById(touchedId));
+            let targetId=ev.target.id;
+            let wardNo=parseInt(targetId.substring(4));
+            let nurseNo=parseInt(touchedElementId.substring(5));
+            nurses[nurseNo].allotment=wardNo;
+            console.log("new allotment made"+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
+
+        
         }
         
         
