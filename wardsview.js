@@ -44,8 +44,20 @@ var wardsview=function(){
             // console.log("new allotment made"+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
             drop(event);
         };
-            warddiv.appendChild(wardbox);
-            content.appendChild(warddiv);
+        wardbox.addEventListener('touchstart',function(event){
+            console.log(event)
+            console.log("A touch event has occured on a ward")
+            event.preventDefault();
+            // let touchedId = event.dataTransfer.getData("text");
+            console.log(touchedElementId);
+            event.target.appendChild(document.getElementById(touchedElementId));
+
+        })
+
+
+        warddiv.appendChild(wardbox);
+        content.appendChild(warddiv);
+
 
 
         }
