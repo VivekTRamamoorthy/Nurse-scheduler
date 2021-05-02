@@ -11,7 +11,7 @@
     
     <h1>Nurse scheduling tool</h1>
     <div id="viewnav" class="row">
-        <button onclick="()=>{}">Wards view</button>
+        <button onclick="wardsview()">Wards view</button>
         <button onclick="()=>{}">Nurse view</button>
         <button onclick="()=>{}">Ward edit</button>
         <button onclick="()=>{}">Nurse edit</button>
@@ -20,26 +20,31 @@
     
 
     <div class="row" style="border:solid 2px black; width:99%; padding:2px;">
-        <!-- CONTENT  -->
-        <div class="column" style="width:70%">
 
-            Schedule <br>
+
+
+        <!-- CONTENT  -->
+        <div id="column1" class="column" style="width:70%">
+
+            <!-- Schedule <br>
             <div id="content" >
                 <p>Drag the nurses into wards:</p>
-
-                <div class="warddiv">Ward1 <div id="ward1" ondrop="drop(event)" ondragover="allowDrop(event)" class ="wardbox"></div> </div>
-                <div class="warddiv"> Ward2 <div id="ward2" ondrop="drop(event)" ondragover="allowDrop(event)" class ="wardbox"></div> </div>
-
-            </div>
+            </div> -->
+            <h1>Instructions:</h1>
+            <li>Click Wards view to add nurses to wards.</li>
+            <li>Click Nurses view to allocate wards to nurses.</li>
+            <li>Click Ward edit to edit the list of wards available.</li>
+            <li>Click Nurse edit to edit the list of nurses available.</li>
+            <li>Click Save or Reload for saving the current schedule or reloading previous run. </li>
 
         </div>
             
         <!-- UNALLOTED     -->
-        <div class="column" style="width:25%">
-            <!-- <center> -->
+        <div id="column2" class="column" style="width:25%">
+
             Unalloted <br>
             <div id="unalloted"  ondrop="drop(event)" ondragover="allowDrop(event)" ></div>
-        <!-- </center> -->
+
         </div>
     </div>
     
