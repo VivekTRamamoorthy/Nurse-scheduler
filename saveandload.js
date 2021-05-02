@@ -88,6 +88,7 @@ function download_csv() {
     var hiddenElement = document.createElement('a');
     hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
     hiddenElement.target = '_blank';
+    // var date= new Date;
     hiddenElement.download = 'nurse_schedule.csv';
     hiddenElement.click();
 }
