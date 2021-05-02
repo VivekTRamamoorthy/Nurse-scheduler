@@ -1,6 +1,7 @@
 
 // WARDS VIEW
 var wardsview=function(){
+    var touchedElementId="nothing";
     // creating HTML elements for content
     var column1=document.getElementById("column1")
     column1.innerHTML="Schedule <br>";
