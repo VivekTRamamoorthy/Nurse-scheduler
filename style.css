@@ -16,6 +16,10 @@ body {
       min-height:600px;
   }
 
+  #column1 {
+    overflow:hidden;
+  }
+
 
 #content {
     width:98%;
@@ -35,6 +39,7 @@ body {
     border: 2px solid blue;
     min-height: 600px;
     overflow:hidden;
+    /* width:auto; */
   }
 
 .warddiv {
@@ -73,6 +78,10 @@ body {
     
     border: solid 1px black;
     
+}
+
+table, th, td {
+  border: 1px solid black;
 }
 
 

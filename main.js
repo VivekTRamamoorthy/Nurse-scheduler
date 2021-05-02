@@ -2,10 +2,10 @@
 
 
 
-var wardNames=["unalloted","ward I day shift",
-"ward I afternoon shift",
-"ward I night shift",
-"ward I ground floor morning shift"];
+var wardNames=["unalloted","ward I morning",
+"ward I afternoon",
+"ward I night ",
+"ward I G floor morning "];
 var nurseNames=["bharathi", "hema","esther",]
 var allotmentTable=new Array(wardNames.length).fill(new Array(nurseNames.length).fill(0));
 var unalloted=new Array(nurseNames.length).fill(1);
@@ -144,7 +144,7 @@ var Nurse=function(roll,name,phone="00000"){
             let wardNo=parseInt(targetId.substring(4));
             let nurseNo=parseInt(touchedElementId.substring(5));
             nurses[nurseNo].allotment=wardNo;
-            console.log("new allotment made"+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
+            console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
             }
         
         }

@@ -47,16 +47,16 @@ var wardsview=function(){
         wardbox.addEventListener('touchstart',function(event){
             let targetId=event.target.id;
             if(touchedElementId.substr(0,5)=="nurse" && targetId.substr(0,4)=="ward"){
-            console.log(event)
-            console.log("A touch event has occured on a ward")
+            // console.log(event)
+            // console.log("A touch event has occured on a ward")
             event.preventDefault();
             // let touchedId = event.dataTransfer.getData("text");
             // console.log(touchedElementId);
             event.target.appendChild(document.getElementById(touchedElementId));
 
-            console.log(targetId);
+            // console.log(targetId);
             let wardNo=parseInt(targetId.substring(4));
-            console.log({wardNo})
+            // console.log({wardNo})
             let nurseNo=parseInt(touchedElementId.substring(5));
             nurses[nurseNo].allotment=wardNo;
             console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
