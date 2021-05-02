@@ -5,17 +5,73 @@
 var saveandload=function(){
     // creating HTML elements for content
     var column1=document.getElementById("column1")
-    var textHTML="<h1>Save current data: </h1> \n";
-    textHTML=textHTML.concat("<li>Click here to save data to an external file</li> ");
-    textHTML=textHTML.concat("<li>Click Nurses view to allocate wards to nurses.</li>");
-    textHTML=textHTML.concat("<li>Click Ward edit to edit the list of wards available.</li>");
-    textHTML=textHTML.concat("<li>Click Nurse edit to edit the list of nurses available.</li>");
-    textHTML=textHTML.concat("<li>Click Save or Reload for saving the current schedule or reloading previous run. </li><br>");
+    var textHTML="<h2>Save progress </h2> \n";
+    textHTML=textHTML.concat("<li>IMPORTANT: SAVE FREQUENCTLY! </li> ");
+    textHTML=textHTML.concat("<li>REFRESHING WILL DISCARD ALL PROGRESS  </li>");
+
+    textHTML=textHTML.concat("<li> This static site does not store any information entered by the user </li><br>");
+
     
     column1.innerHTML=textHTML;
     
 
-    // Create Output data 
+    // // Create Output data 
+    // var output=[];
+    // for(let i=0;i<nurseNames.length;i++){
+    //     output[i]=[i,nurseNames[i],nurses[i].allotment,wardNames[nurses[i].allotment]];
+        
+    // }
+    // console.log(output)
+    
+    // var csv = 'No,Nurse,Wardno, Allotment\n';
+    // output.forEach(function(row) {
+    //     csv += row.join(',');
+    //     csv += "\n";
+    // });
+    // console.log(csv);
+    
+    
+    
+    // DOWNLOAD CSV BUTTON
+    var savebutton=document.createElement('button');
+    savebutton.innerText="SAVE PROGRESS";
+    savebutton.onclick=function(){download_csv();};
+    column1.appendChild(savebutton);
+    
+    // GAP
+    var gap=document.createElement("div");
+    gap.innerHTML="<br><br>"
+    column1.appendChild(gap);
+
+    // GENERATE TABLE BUTTON
+    // var printbutton=document.createElement('button');
+    // printbutton.innerText="Generate allotment table";
+    // printbutton.onclick=function(){print_table();};
+    // column1.appendChild(printbutton);
+
+    print_table();
+    
+
+    //GAP
+    var gap=document.createElement("div");
+    gap.innerHTML="<br><br>"
+    column1.appendChild(gap);
+    
+    
+    
+    // creating HTML elements for content
+    var column2=document.getElementById("column2")
+    column2.innerHTML="Sidebar <br>";
+    var sidebar=document.createElement("div");
+    sidebar.id="sidebar";
+    sidebar.innerHTML="";
+    column2.appendChild(sidebar);
+    
+}
+
+// FUNCTION SPACE
+
+function download_csv() {
     var output=[];
     for(let i=0;i<nurseNames.length;i++){
         output[i]=[i,nurseNames[i],nurses[i].allotment,wardNames[nurses[i].allotment]];
@@ -29,38 +85,6 @@ var saveandload=function(){
         csv += "\n";
     });
     console.log(csv);
-    
-    
-    
-    // DOWNLOAD CSV BUTTON
-    var savebutton=document.createElement('button');
-    savebutton.innerText="SAVE PROGRESS";
-    savebutton.onclick=function(){download_csv();};
-    column1.appendChild(savebutton);
-    
-    
-    var printbutton=document.createElement('button');
-    printbutton.innerText="Print as table";
-    printbutton.onclick=function(){print_table();};
-    column1.appendChild(printbutton);
-    
-    var gap=document.createElement("div");
-    gap.innerHTML="<br><br>"
-    column1.appendChild(gap);
-    
-    
-    
-    // creating HTML elements for content
-    var column2=document.getElementById("column2")
-    column2.innerHTML="Sidebar <br>";
-    var unalloted=document.createElement("div");
-    unalloted.id="unalloted";
-    unalloted.innerHTML="";
-    column2.appendChild(unalloted);
-    
-}
-
-function download_csv() {
     var hiddenElement = document.createElement('a');
     hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
     hiddenElement.target = '_blank';

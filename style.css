@@ -70,7 +70,7 @@ body {
 }
 
 .warddiv {
-    min-width: 20%;
+    min-width: 40%;
     max-width:90%;
     /* height: px; */
     margin: 1% ; 
@@ -81,7 +81,7 @@ body {
     overflow: hidden;
 }
   .wardbox {
-    width: 40%;
+    width: auto;
     min-height: 25px;
     padding: 5px;
     /* float: left; */
@@ -95,9 +95,9 @@ body {
 
   .sidebarelem {
     padding: 5px;
-    /* width:5px; */
+    width:auto;
     /* padding-left: 10px; */
-    overflow: auto;
+    /* overflow: auto; */
     margin: 3%;
     
     border: solid 1px black;
@@ -107,9 +107,9 @@ body {
 
 .nurse {
     padding: 5px;
-    /* width:5px; */
+    width:auto;
     /* padding-left: 10px; */
-    overflow: auto;
+    overflow: hidden;
     margin: 3%;
     
     border: solid 1px black;

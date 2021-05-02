@@ -25,12 +25,12 @@
     
     <h1>Nurse scheduling tool</h1>
     <div id="viewnav" class="row">
-        <button onclick="instructionview()">Home</button>
-        <button onclick="wardsview()">Wards view</button>
-        <button onclick="nurseview()">Nurse view</button>
-        <button onclick="wardedit()">Ward edit</button>
-        <button onclick="nurseedit()">Nurse edit</button>
-        <button onclick="saveandload()">Save or load</button>
+        <button onclick="instructionview()">HOME</button>
+        <button onclick="wardsview()">WARD VIEW</button>
+        <button onclick="nurseview()">NURSE VIEW</button>
+        <button onclick="wardedit()">EDIT WARDS</button> 
+         <button onclick="nurseedit()">EDIT NURSES</button>
+        <button onclick="saveandload()">Import Export</button>
     </div>
     
 
@@ -40,29 +40,18 @@
 
         <!-- CONTENT  -->
         <div id="column1" class="column" style="width:65%">
-
-            <!-- Schedule <br>
-            <div id="content" >
-                <p>Drag the nurses into wards:</p>
-            </div> -->
-            <h1>Instructions:</h1>
-            <li>Click Wards view to add nurses to wards.</li>
-            <li>Click Nurses view to allocate wards to nurses.</li>
-            <li>Click Ward edit to edit the list of wards available.</li>
-            <li>Click Nurse edit to edit the list of nurses available.</li>
-            <li>Click Save or Reload for saving the current schedule or reloading previous run. </li>
-
+            <h2>Welcome. Click home to read instructions</h2>
         </div>
             
-        <!-- UNALLOTED     -->
+        <!-- SIDEBAR     -->
         <div id="column2" class="column" style="width:25%">
-
             Sidebar <br>
-            <div id="unalloted"  ondrop="drop(event)" ondragover="allowDrop(event)" ></div>
-
+            <div id="sidebar"  ondrop="drop(event)" ondragover="allowDrop(event)" ></div>
         </div>
     </div>
-    
+    <script>
+        instructionview();
+    </script>
 
 
 

@@ -124,15 +124,13 @@ var wardsview=function(){
     function drop(ev) {
         ev.preventDefault();
         let targetId=ev.target.id;
-        let touchedId = ev.dataTransfer.getData("text");
-        if(touchedId.substr(0,5)=="nurse" && targetId.substr(0,4)=="ward"){
-        console.log({touchedId})
-        ev.target.appendChild(document.getElementById(touchedId));
-
-        let wardNo=parseInt(targetId.substring(4));
-        let nurseNo=parseInt(touchedElementId.substring(5));
-        nurses[nurseNo].allotment=wardNo;
-        console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
+        touchedElementId = ev.dataTransfer.getData("text");
+        if(touchedElementId.substr(0,5)=="nurse" && targetId.substr(0,4)=="ward"){
+            ev.target.appendChild(document.getElementById(touchedElementId));
+            let wardNo=parseInt(targetId.substring(4));
+            let nurseNo=parseInt(touchedElementId.substring(5));
+            nurses[nurseNo].allotment=wardNo;
+            console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
         }
     
     }
