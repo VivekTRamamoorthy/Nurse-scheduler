@@ -1,5 +1,7 @@
 # Free web tool for nurse scheduling.
-Add nurses and wards and assign using drag and drop
+This is a free web tool for manual nurse scheduling. I created this to simplify tasks for my mom who is a head-nurse at a hospital. 
+
+Use the tool at VivekTRamamoorthy.github.io/Nurse-sheduler
 
 ## Instructions
 Add nurses in nurse view
