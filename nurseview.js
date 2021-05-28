@@ -1,5 +1,5 @@
 
-// WARDS VIEW
+// NURSE VIEW
 var nurseview=function(){
     // creating HTML elements for column 1
     var column1=document.getElementById("column1")
@@ -32,42 +32,30 @@ var nurseview=function(){
         nurses[i].id=nursediv.id;
         wardNo=nurses[i].allotment;
         nursebox.innerText=wardNames[wardNo];
-
+        
+        // DROP WARD TO NURSE
         nursebox.ondragover=function(event){ event.preventDefault();};
         nursebox.ondrop=function(event){ 
             event.preventDefault();
             let touchedId = event.dataTransfer.getData("text");
-            // console.log(touchedId);
-
-            // event.target.innerText=touchedId;
-
             let targetId=event.target.id;
             let wardNo=parseInt(touchedElementId.substring(4));
             let nurseNo=parseInt(targetId.substring(5));
             nurses[nurseNo].allotment=wardNo;
             event.target.innerText=wardNames[wardNo];
             console.log("new allotment made"+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
-            // drop(event);
         };
+        //TOUCH
         nursebox.addEventListener('touchstart',function(event){
             let targetId=event.target.id;
             if(touchedElementId.substr(0,4)=="ward" && targetId.substr(0,5)=="nurse"){
-            // console.log(event)
             console.log("A touch event has occured on a nurse")
             event.preventDefault();
-            // let touchedId = event.dataTransfer.getData("text");
-            // console.log(touchedElementId);
-            // event.target.innerText=parseInt(touchedElementId.substr(4));
-
-            // console.log(targetId);
             let wardNo=parseInt(touchedElementId.substring(4));
-            
-            // console.log({wardNo})
             let nurseNo=parseInt(targetId.substring(5));
             event.target.innerText=wardNames[wardNo];
             nurses[nurseNo].allotment=wardNo;
             console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
-            // touchedElementId="nothing";
             }   
 
 
@@ -77,11 +65,9 @@ var nurseview=function(){
         nursediv.appendChild(nursebox);
         content.appendChild(nursediv);
 
-
-
         }
 
-        // Creating wards
+        // CREATING WARDS
         var warddiv;
         var sidebar=document.getElementById("sidebar");
         for(let i=0;i<wards.length;i++){
@@ -90,6 +76,7 @@ var nurseview=function(){
             warddiv.classList.add("nurse");
             warddiv.draggable="true";
             warddiv.id="ward"+i.toString();
+            // DRAG 
             warddiv.ondragstart=function(event){
                 event.dataTransfer.setData("text", event.target.id);
                 previoustouchedElementId=touchedElementId;
@@ -99,7 +86,7 @@ var nurseview=function(){
 
                 console.log("Touched element is:"+touchedElementId);
             };
-            // For mobile
+            // TOUCH
             warddiv.addEventListener('touchstart',function(event){
                 let targetId=event.target.id;
                 if (targetId.substr(0,4)=="ward"){
@@ -110,8 +97,6 @@ var nurseview=function(){
                     document.getElementById(touchedElementId).style="border: 2px solid red";
                     console.log("Touched element is:"+touchedElementId);
                 });
-            // let allocatedWardForNurse=document.getElementById("ward"+nurses[i].allotment)
-            // console.log("ward"+nurses[i].allotment)
             sidebar.appendChild(warddiv);
         }
     }

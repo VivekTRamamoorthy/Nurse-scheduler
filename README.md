@@ -6,4 +6,5 @@ Use the tool at [VivekTRamamoorthy.github.io/Nurse-scheduler](https://VivekTRama
 ## Instructions
 - Allocate nurses to different wards and shifts in the hospital for the week. 
 - Save and load CSV files from your progress.
+- All else supposed to be self-explanatory. 
 
