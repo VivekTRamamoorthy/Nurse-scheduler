@@ -19,10 +19,8 @@ var nurseview=function(){
     column2.appendChild(sidebar);
     touchedElementId="ward0";
 
-    // adding wards
-    // var wards=[]
+    // ADDING NURSES
     for(let i=0;i<nurseNames.length;i++){
-        // wards[i]=new Ward(wardNames[i]);
         nursediv=document.createElement("div");
         nursediv.innerText=(i+1).toString()+". "+nurses[i].name+" ";
         nursediv.classList.add("contentdiv")

@@ -2,7 +2,7 @@
 
 
 // INSTRUCTIONS VIEW
-var saveandload=function(){
+var saveData=function(){
     // creating HTML elements for content
     var column1=document.getElementById("column1")
     var textHTML="<h2>Save progress </h2> \n";
@@ -10,8 +10,6 @@ var saveandload=function(){
     textHTML=textHTML.concat("<li>REFRESHING WILL DISCARD ALL PROGRESS  </li>");
 
     textHTML=textHTML.concat("<li> This static site does not store any information entered by the user </li><br>");
-
-    
     column1.innerHTML=textHTML;
     
 
@@ -34,9 +32,16 @@ var saveandload=function(){
     
     // DOWNLOAD CSV BUTTON
     var savebutton=document.createElement('button');
-    savebutton.innerText="SAVE PROGRESS";
+    savebutton.innerText="Save CSV";
     savebutton.onclick=function(){download_csv();};
     column1.appendChild(savebutton);
+
+    // PRINT SCHEDULE as PDF
+    tablePrintButton=document.createElement("button");
+    tablePrintButton.onclick=function(){PrintElem("tableDiv")};
+    tablePrintButton.innerText="Print PDF";
+    
+    column1.appendChild(tablePrintButton);
     
     // GAP
     var gap=document.createElement("div");
@@ -48,6 +53,8 @@ var saveandload=function(){
     // printbutton.innerText="Generate allotment table";
     // printbutton.onclick=function(){print_table();};
     // column1.appendChild(printbutton);
+
+
 
     print_table();
     
@@ -73,62 +80,62 @@ var saveandload=function(){
     gap.innerHTML="<br><br>"
     column1.appendChild(gap);
     
-    // UPLOAD AND PARSE CSV FILES
-    var loadedData;
-    // <input type="file" id="myFile">
-    // <button onclick='processFile()'>Process</button>
-    // <table id="myTable"></table>
-    var inputFileDiv= document.createElement("div");
-    var inputFileElement= document.createElement("input"); // upload file button
-    inputFileElement.type="file";
-    inputFileElement.id="myFile"
-    inputFileDiv.appendChild(inputFileElement);
-    var inputFileButton=document.createElement("button"); // preview data button
-    inputFileButton.innerText="Preview file";
-    inputFileButton.id="processBtn";
-    inputFileDiv.appendChild(inputFileButton);
-    // table
-    var inputFileTable=document.createElement("table");
-    inputFileTable.id="myTable";
-    inputFileDiv.appendChild(inputFileTable);
-    // var previewed;
-    var loadedData;
-    inputFileButton.onclick=function(){
+    // // UPLOAD AND PARSE CSV FILES
+    // var loadedData;
+    // // <input type="file" id="myFile">
+    // // <button onclick='processFile()'>Process</button>
+    // // <table id="myTable"></table>
+    // var inputFileDiv= document.createElement("div");
+    // var inputFileElement= document.createElement("input"); // upload file button
+    // inputFileElement.type="file";
+    // inputFileElement.id="myFile"
+    // inputFileDiv.appendChild(inputFileElement);
+    // var inputFileButton=document.createElement("button"); // preview data button
+    // inputFileButton.innerText="Preview file";
+    // inputFileButton.id="processBtn";
+    // inputFileDiv.appendChild(inputFileButton);
+    // // table
+    // var inputFileTable=document.createElement("table");
+    // inputFileTable.id="myTable";
+    // inputFileDiv.appendChild(inputFileTable);
+    // // var previewed;
+    // var loadedData;
+    // inputFileButton.onclick=function(){
 
-        loadedData=processFile();
-        var acceptFileButton=document.createElement("button");     // accept button
-        acceptFileButton.innerText="Accept";
-        acceptFileButton.id="acceptBtn";
-        acceptFileButton.onclick=function(){
-            console.log("loading csv data...")
-            // nurses=[];wards=[]
-            // nurseNames=[];wardNames=[];
-            row=0;
-            for (let allrows = 1; allrows < loadedData.length; allrows++) {
-                if(loadedData[allrows].length<4){break}
-                row=row+1;
-                i=row-1;
-                nurseNames[i] = loadedData[row][1];
-                let allotment = loadedData[row][2];
-                nurses[i]=new Nurse(10000+i,nurseNames[i]);
-                nurses[i].allotment = allotment;
+    //     loadedData=processFile();
+    //     var acceptFileButton=document.createElement("button");     // accept button
+    //     acceptFileButton.innerText="Accept";
+    //     acceptFileButton.id="acceptBtn";
+    //     acceptFileButton.onclick=function(){
+    //         console.log("loading csv data...")
+    //         // nurses=[];wards=[]
+    //         // nurseNames=[];wardNames=[];
+    //         row=0;
+    //         for (let allrows = 1; allrows < loadedData.length; allrows++) {
+    //             if(loadedData[allrows].length<4){break}
+    //             row=row+1;
+    //             i=row-1;
+    //             nurseNames[i] = loadedData[row][1];
+    //             let allotment = loadedData[row][2];
+    //             nurses[i]=new Nurse(10000+i,nurseNames[i]);
+    //             nurses[i].allotment = allotment;
                 
-                wardNames[allotment] = loadedData[row][3];
-                wards[allotment]=new Ward(wardNames[allotment]);
-                wards[allotment].allotment.push(i);
+    //             wardNames[allotment] = loadedData[row][3];
+    //             wards[allotment]=new Ward(wardNames[allotment]);
+    //             wards[allotment].allotment.push(i);
 
-            }
-            console.log("loaded csv data...")
+    //         }
+    //         console.log("loaded csv data...")
             
-        }        
+    //     }        
         
         
-        inputFileDiv.appendChild(acceptFileButton);
-    }
+    //     inputFileDiv.appendChild(acceptFileButton);
+    // }
 
     
     
-    column1.appendChild(inputFileDiv);
+    // column1.appendChild(inputFileDiv);
     
     
     
@@ -193,6 +200,13 @@ function print_table(){
     tableDiv.appendChild(tableElement);
     column1.appendChild(tableDiv);
     
+    //GAP
+    var gap=document.createElement("div");
+    gap.innerHTML="<br>"
+    column1.appendChild(gap);
+
+    // Table print button
+
     tablePrintButton=document.createElement("button");
     tablePrintButton.onclick=function(){PrintElem("tableDiv")};
     tablePrintButton.innerText="Print this table";
