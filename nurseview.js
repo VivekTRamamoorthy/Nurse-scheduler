@@ -22,12 +22,16 @@ var nurseview=function(){
     // ADDING NURSES
     for(let i=0;i<nurseNames.length;i++){
         nursediv=document.createElement("div");
-        nursediv.innerText=(i+1).toString()+". "+nurses[i].name+" ";
-        nursediv.classList.add("contentdiv")
+        nursediv.classList.add("nursediv")
+        nursenamediv=document.createElement("span");
+        nursenamediv.innerText=(i+1).toString()+". "+nurses[i].name+" ";
+        nursenamediv.classList.add("nursecontentbox")
+        nursediv.appendChild(nursenamediv);
+
         // br=document.createElement("br");
         // nursediv.appendChild(br);
-        nursebox=document.createElement("div");
-        nursebox.classList.add("contentbox");
+        nursebox=document.createElement("span");
+        nursebox.classList.add("nursecontentbox");
         nursebox.id="nurse"+i.toString();
         nurses[i].id=nursediv.id;
         wardNo=nurses[i].allotment;
