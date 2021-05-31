@@ -103,7 +103,7 @@ var editData=function(){
     wardTable.appendChild(heading)
     
     // EDIT WARDS TABLE
-    for(let i=0;i<wardNames.length;i++){
+    for(let i=1;i<wardNames.length;i++){
         
         // ADDING INPUT FOR WARD NAMES
         thisRow=document.createElement("tr");

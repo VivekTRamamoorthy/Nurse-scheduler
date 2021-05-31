@@ -38,7 +38,7 @@ var Nurse=function(roll,name,phone="00000"){
     this.name=name;
     this.phone=phone;
     this.allotment=0;
-    this.shift=0;
+    this.shift=1;
     this.set=function(property,value){
         if (property=="phone"){
             this.phone=value;

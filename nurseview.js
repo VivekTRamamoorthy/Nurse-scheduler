@@ -27,6 +27,7 @@ var nurseview=function(){
 
     // ADDING NURSES
     for(let i=0;i<nurseNames.length;i++){
+        // NURSE NAME
         nursediv=document.createElement("div");
         nursediv.classList.add("nursediv")
         nursenamediv=document.createElement("span");
@@ -34,15 +35,13 @@ var nurseview=function(){
         nursenamediv.classList.add("nursecontentbox")
         nursediv.appendChild(nursenamediv);
 
-        // br=document.createElement("br");
-        // nursediv.appendChild(br);
+        // NURSE BOX
         nursebox=document.createElement("span");
         nursebox.classList.add("nursecontentbox");
         nursebox.id="nurse"+i.toString();
         nurses[i].id=nursediv.id;
         wardNo=nurses[i].allotment;
         nursebox.innerText=wardNames[wardNo];
-        
         // DROP WARD TO NURSE
         nursebox.ondragover=function(event){ event.preventDefault();};
         nursebox.ondrop=function(event){ 
@@ -59,20 +58,35 @@ var nurseview=function(){
         nursebox.addEventListener('touchstart',function(event){
             let targetId=event.target.id;
             if(touchedElementId.substr(0,4)=="ward" && targetId.substr(0,5)=="nurse"){
-            console.log("A touch event has occured on a nurse")
-            event.preventDefault();
-            let wardNo=parseInt(touchedElementId.substring(4));
-            let nurseNo=parseInt(targetId.substring(5));
-            event.target.innerText=wardNames[wardNo];
-            nurses[nurseNo].allotment=wardNo;
-            console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
+                console.log("A touch event has occured on a nurse")
+                event.preventDefault();
+                let wardNo=parseInt(touchedElementId.substring(4));
+                let nurseNo=parseInt(targetId.substring(5));
+                event.target.innerText=wardNames[wardNo];
+                nurses[nurseNo].allotment=wardNo;
+                console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
             }   
-
-
         })
-
-
         nursediv.appendChild(nursebox);
+        
+        // NURSE SHIFT
+        nurseshiftdiv=document.createElement("div");
+        nurseshiftdiv.classList.add("nursecontentbox");
+        nurseshiftdiv.style.width="20%"
+        nurseshift=document.createElement("select");
+        if (wards[nurses[i].allotment].shifts==1){
+            nurseshift.innerHTML="<option value='1'>1</option>";
+        }else{
+            nurseshift.innerHTML="<option value='1'>1</option> <option value='2'>2</option><option value='3'>3</option>";
+        }
+        nurseshift.classList.add("nursecontentbox");
+        nurseshift.id="nurseshift"+i.toString();
+        nurseshift.value=nurses[i].shift;
+        nurseshiftdiv.appendChild(nurseshift);
+        nursediv.appendChild(nurseshiftdiv);
+        
+
+
         content.appendChild(nursediv);
 
         }
