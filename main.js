@@ -38,6 +38,7 @@ var Nurse=function(roll,name,phone="00000"){
     this.name=name;
     this.phone=phone;
     this.allotment=0;
+    this.shift=0;
     this.set=function(property,value){
         if (property=="phone"){
             this.phone=value;
@@ -51,7 +52,7 @@ for(let i=0;i<wardNames.length;i++){
     wards[i]=new Ward(wardNames[i]);
 }
 
-wards[0].shifts=1;
+wards[0].shifts=0;
 // adding nurses
 var nurses=[];
 for(let i=0;i<nurseNames.length;i++){
