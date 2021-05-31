@@ -6,34 +6,30 @@ var saveData=function(){
     // creating HTML elements for content
     var column1=document.getElementById("column1")
     var textHTML="<h2>Save progress </h2> \n";
-    textHTML=textHTML.concat("<li>IMPORTANT: SAVE FREQUENCTLY! </li> ");
+    textHTML=textHTML.concat("<li>IMPORTANT: SAVE FREQUENTLY! </li> ");
     textHTML=textHTML.concat("<li>REFRESHING WILL DISCARD ALL PROGRESS  </li>");
-
-    textHTML=textHTML.concat("<li> This static site does not store any information entered by the user </li><br>");
+    textHTML=textHTML.concat("<br>");
     column1.innerHTML=textHTML;
+    var column2=document.getElementById("column2");
     
-
-    // // Create Output data 
-    // var output=[];
-    // for(let i=0;i<nurseNames.length;i++){
-    //     output[i]=[i,nurseNames[i],nurses[i].allotment,wardNames[nurses[i].allotment]];
-        
-    // }
-    // console.log(output)
-    
-    // var csv = 'No,Nurse,Wardno, Allotment\n';
-    // output.forEach(function(row) {
-    //     csv += row.join(',');
-    //     csv += "\n";
-    // });
-    // console.log(csv);
-    
+    // HIDE SIDEBAR
+    column1.style="width:auto";
+    column2.hidden=true;
+    column2.style="width:25%";
     
     
     // DOWNLOAD CSV BUTTON
     var savebutton=document.createElement('button');
     savebutton.innerText="Save CSV";
-    savebutton.onclick=function(){download_csv();};
+    savebutton.onclick=function(){
+        var output=[];
+        for(let i=0;i<nurseNames.length;i++){
+            output[i]=[i,nurseNames[i],nurses[i].allotment,wardNames[nurses[i].allotment]];
+            
+        }
+        console.log(output)
+        download_csv(output);
+    };
     column1.appendChild(savebutton);
 
     // PRINT SCHEDULE as PDF
@@ -48,14 +44,7 @@ var saveData=function(){
     gap.innerHTML="<br><br>"
     column1.appendChild(gap);
 
-    // GENERATE TABLE BUTTON
-    // var printbutton=document.createElement('button');
-    // printbutton.innerText="Generate allotment table";
-    // printbutton.onclick=function(){print_table();};
-    // column1.appendChild(printbutton);
-
-
-
+    // PRINT DATA TABLE ON SCREEN
     print_table();
     
 
@@ -79,82 +68,23 @@ var saveData=function(){
     var gap=document.createElement("div");
     gap.innerHTML="<br><br>"
     column1.appendChild(gap);
-    
-    // // UPLOAD AND PARSE CSV FILES
-    // var loadedData;
-    // // <input type="file" id="myFile">
-    // // <button onclick='processFile()'>Process</button>
-    // // <table id="myTable"></table>
-    // var inputFileDiv= document.createElement("div");
-    // var inputFileElement= document.createElement("input"); // upload file button
-    // inputFileElement.type="file";
-    // inputFileElement.id="myFile"
-    // inputFileDiv.appendChild(inputFileElement);
-    // var inputFileButton=document.createElement("button"); // preview data button
-    // inputFileButton.innerText="Preview file";
-    // inputFileButton.id="processBtn";
-    // inputFileDiv.appendChild(inputFileButton);
-    // // table
-    // var inputFileTable=document.createElement("table");
-    // inputFileTable.id="myTable";
-    // inputFileDiv.appendChild(inputFileTable);
-    // // var previewed;
-    // var loadedData;
-    // inputFileButton.onclick=function(){
-
-    //     loadedData=processFile();
-    //     var acceptFileButton=document.createElement("button");     // accept button
-    //     acceptFileButton.innerText="Accept";
-    //     acceptFileButton.id="acceptBtn";
-    //     acceptFileButton.onclick=function(){
-    //         console.log("loading csv data...")
-    //         // nurses=[];wards=[]
-    //         // nurseNames=[];wardNames=[];
-    //         row=0;
-    //         for (let allrows = 1; allrows < loadedData.length; allrows++) {
-    //             if(loadedData[allrows].length<4){break}
-    //             row=row+1;
-    //             i=row-1;
-    //             nurseNames[i] = loadedData[row][1];
-    //             let allotment = loadedData[row][2];
-    //             nurses[i]=new Nurse(10000+i,nurseNames[i]);
-    //             nurses[i].allotment = allotment;
-                
-    //             wardNames[allotment] = loadedData[row][3];
-    //             wards[allotment]=new Ward(wardNames[allotment]);
-    //             wards[allotment].allotment.push(i);
-
-    //         }
-    //         console.log("loaded csv data...")
-            
-    //     }        
-        
-        
-    //     inputFileDiv.appendChild(acceptFileButton);
-    // }
-
-    
-    
-    // column1.appendChild(inputFileDiv);
-    
-    
-    
-
+   
     
 }
 
 // FUNCTION SPACE
 
-function download_csv() {
-    var output=[];
-    for(let i=0;i<nurseNames.length;i++){
-        output[i]=[i,nurseNames[i],nurses[i].allotment,wardNames[nurses[i].allotment]];
+function download_csv(out) {
+    // var output=[];
+    // for(let i=0;i<nurseNames.length;i++){
+    //     output[i]=[i,nurseNames[i],nurses[i].allotment,wardNames[nurses[i].allotment]];
         
-    }
-    console.log(output)
+    // }
+    // console.log(output)
     
-    var csv = 'No,Nurse,Wardno, Allotment\n';
-    output.forEach(function(row) {
+    // var csv = 'No,Nurse,Wardno, Allotment\n';
+    var csv='';
+    out.forEach(function(row) {
         csv += row.join(',');
         csv += "\n";
     });
@@ -195,6 +125,7 @@ function print_table(){
         thisRow.appendChild(thisCell); // add cell 
         thisCell.innerText=wardNames[nurses[i].allotment]; // enter cell 1 text
         
+        tableElement.appendChild(thisRow);
         
     }
     tableDiv.appendChild(tableElement);

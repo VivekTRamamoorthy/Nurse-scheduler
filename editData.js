@@ -3,97 +3,136 @@
 var editData=function(){
     // creating HTML elements for column 1
     var column1=document.getElementById("column1")
-    column1.innerHTML="Schedule <br>";
+    column1.innerHTML="<h2>Schedule</h2> <br>";
     var content=document.createElement("div");
-    content.innerHTML="<p>Edit Nurses:</p>";
     content.id="content";
     column1.appendChild(content);
-
+    
     // creating HTML elements for column 2
     var column2=document.getElementById("column2")
-    column2.innerHTML="Ward List <br>"; 
-    var sidebar=document.createElement("div");
-    sidebar.id="sidebar";
-    sidebar.innerHTML="";
-    sidebar.ondrop=function(event){drop(event)};
-    sidebar.ondragover=function(event){allowDrop(event)};
-    column2.appendChild(sidebar);
-    touchedElementId="ward0";
-
+    
+    // HIDE SIDEBAR
+    column1.style="width:auto";
+    column2.hidden=true;
+    
+    
     // UPDATE BUTTON
     updateButton=document.createElement("button");
     updateButton.innerText="UPDATE";
     updateButton.onclick=function(){updateNurses();}
-    column1.appendChild(updateButton)
+    content.appendChild(updateButton);
     
-    // COLUMN 1
-    nursediv=document.createElement("div");
-    nursediv.classList.add("nurseeditbox")
+    // GAP
+    var gap=document.createElement("div");
+    gap.innerHTML="<br>"
+    content.appendChild(gap);
     
-    //  TABLE HEADER
-    nurseNameDiv=document.createElement("div");
-    nurseNameDiv.type="text";
-    nurseNameDiv.innerText="Names";
-    nursediv.appendChild(nurseNameDiv)
-    content.appendChild(nursediv);
+    // HEADING FOR NURSE EDIT
+    var nurseTable=document.createElement("table");
+    var nurseTableDiv=document.createElement("div");
+    nurseTableDiv.classList.add("tableEditDiv")
+    nurseTableDiv.innerHTML="EDIT NURSES: <br>"
+    nurseTableDiv.appendChild(nurseTable);
+
+    content.appendChild(nurseTableDiv);
+    var heading=document.createElement("tr");
+    heading.innerHTML="<th>No</th><th>Name</th><th>Phone number</th>";
+    nurseTable.appendChild(heading)
     
-    // EDIT NURSES
+    // EDIT NURSES TABLE
     for(let i=0;i<nurseNames.length;i++){
         
         // ADDING INPUT FOR NURSE NAMES
-        nurseNameDiv=document.createElement("input");
-        nurseNameDiv.type="text";
-        nurseNameDiv.value=nurses[i].name;
-        nurseNameDiv.id="nurseInput"+i.toString();
-        nursediv.appendChild(nurseNameDiv)
+        thisRow=document.createElement("tr");
+        // Nurse No
+        thisCell=document.createElement("td");
+        thisRow.appendChild(thisCell);
+        thisCell.innerText=(i+1).toString();
+        // Nurse Name (editable)
+        thisCell=document.createElement("td");
+        nurseNameInput=document.createElement("input");
+        nurseNameInput.value=nurses[i].name;
+        nurseNameInput.id="nurseNameInput"+i.toString();
+        thisCell.appendChild(nurseNameInput);
+        thisRow.appendChild(thisCell);
+        // Nurse Phone number (editable)
+        thisCell=document.createElement("td");
+        nursePhoneInput=document.createElement("input");
+        nursePhoneInput.value=nurses[i].phone;
+        nursePhoneInput.id="nursePhoneInput"+i.toString();
+        thisCell.appendChild(nursePhoneInput);
+        thisRow.appendChild(thisCell);
         
-        content.appendChild(nursediv);
-        
+        nurseTable.appendChild(thisRow)
     }
+
+    // GAP
+    var gap=document.createElement("div");
+    gap.innerHTML="<br><br><br>"; gap.style=" display:block;  overflow:auto;   height:auto;    width:95vw;";
+    content.appendChild(gap);
     
-    // CREATING WARDS
-    var warddiv;
-    var sidebar=document.getElementById("sidebar");
-    for(let i=0;i<wards.length;i++){
-        warddiv=document.createElement("div");
-        warddiv.innerText=wards[i].name;
-        warddiv.classList.add("nurse");
-        warddiv.draggable="true";
-        warddiv.id="ward"+i.toString();
-        // DRAG 
-        warddiv.ondragstart=function(event){
-            event.dataTransfer.setData("text", event.target.id);
-            previoustouchedElementId=touchedElementId;
-            document.getElementById(previoustouchedElementId).style="";
-            touchedElementId= event.target.id;
-            document.getElementById(touchedElementId).style="border: 2px solid red";
-            
-            console.log("Touched element is:"+touchedElementId);
-        };
-        // TOUCH
-        warddiv.addEventListener('touchstart',function(event){
-            let targetId=event.target.id;
-            if (targetId.substr(0,4)=="ward"){
-                event.preventDefault();}
-                previoustouchedElementId=touchedElementId;
-                document.getElementById(previoustouchedElementId).style="";
-                touchedElementId= event.target.id;
-                document.getElementById(touchedElementId).style="border: 2px solid red";
-                console.log("Touched element is:"+touchedElementId);
-            });
-            sidebar.appendChild(warddiv);
-        }
+     // HEADING FOR WARD EDIT
+     var wardTable=document.createElement("table");
+     var wardTableDiv=document.createElement("div");
+     wardTableDiv.classList.add("tableEditDiv");
+     wardTableDiv.innerHTML="EDIT WARDS: <br>"
+     wardTableDiv.appendChild(wardTable);
+ 
+     content.appendChild(wardTableDiv);
+     var heading=document.createElement("tr");
+     heading.innerHTML="<th>No</th><th>Ward</th><th>Shifts</th>";
+     wardTable.appendChild(heading)
+     
+     // EDIT WARDS TABLE
+     for(let i=0;i<wardNames.length;i++){
+         
+         // ADDING INPUT FOR WARD NAMES
+         thisRow=document.createElement("tr");
+         // WARD No
+         thisCell=document.createElement("td");
+         thisRow.appendChild(thisCell);
+         thisCell.innerText=(i+1).toString();
+         // WARD Name (editable)
+         thisCell=document.createElement("td");
+         wardNameInput=document.createElement("input");
+         wardNameInput.value=wards[i].name;
+         wardNameInput.id="wardNameInput"+i.toString();
+         thisCell.appendChild(wardNameInput);
+         thisRow.appendChild(thisCell);
+        // Ward shifts (editable)
+        thisCell=document.createElement("td");
+        wardShiftSelect=document.createElement("select");
+        wardShiftSelect.innerHTML="<option value='1'>1</option><option value='3'>3</option>"
+        wardShiftSelect.value=wards[i].shifts;
+        wardShiftSelect.id="wardShiftSelect"+i.toString();
+        thisCell.appendChild(wardShiftSelect);
+        thisRow.appendChild(thisCell);
+         
+         wardTable.appendChild(thisRow)
+     }
+}
+
+function updateNurses(){
+    for(let i=0;i<nurseNames.length;i++){
+        // UPDATING INPUT FOR NURSE NAMES
+        nurseNameInput=document.getElementById("nurseNameInput"+i.toString());
+        nurseNames[i]=nurseNameInput.value;
+        nurses[i].name=nurseNameInput.value;
     }
-    
-    function updateNurses(){
-        for(let i=0;i<nurseNames.length;i++){
-            // ADDING INPUT FOR NURSE NAMES
-            nurseNameInput=document.getElementById("nurseInput"+i.toString());
-            nurseNames[i]=nurseNameInput.value;
-            nurses[i].name=nurseNameInput.value;
-        }
-        console.log("Nurse names updated! :-)")
+    console.log("Nurse names updated! :-)")
+}
+
+function updateWards(){
+    for(let i=0;i<wardNames.length;i++){
+        // UPDATING INPUT FOR WARD NAMES
+        wardNameInput=document.getElementById("wardNameInput"+i.toString());
+        wardNames[i]=wardNameInput.value;
+        wards[i].name=wardNameInput.value;
+        // UPDATING INPUT FOR WARD SHIFTS
+        wardShiftSelect=document.getElementById("wardShiftSelect"+i.toString());
+        wards[i].shifts=wardShiftSelect.value;
     }
-    
-    
-    
+    console.log("Wards names updated! :-)")
+}
+
+

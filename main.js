@@ -5,10 +5,13 @@
 
 
 
-var wardNames=["Unalloted","ward I morning",
-"ward I afternoon",
-"ward I night ",
-"ward I G floor morning "];
+var wardNames=["NONE","WARD I ",
+"WARD II ",
+"WARD III ",
+"ICU ",
+"NICU",
+"COVIDI"];
+
 
 var nurseNames=["albert", "alice","bob","emma","luke","max","pierre","sean"]
 
@@ -16,12 +19,15 @@ var nurseNames=["albert", "alice","bob","emma","luke","max","pierre","sean"]
 
 // Ward class
 
-var Ward=function(name){
+var Ward=function(name,shifts=3){
     this.name=name;
     this.id=null;
     this.allotment=[];
-    this.update=function(){
-        
+    this.shifts=shifts
+    this.set=function(property,value){
+        if (property=="shifts"){
+            this.shifts=value;
+        }
     }
     
 }
@@ -45,6 +51,7 @@ for(let i=0;i<wardNames.length;i++){
     wards[i]=new Ward(wardNames[i]);
 }
 
+wards[0].shifts=1;
 // adding nurses
 var nurses=[];
 for(let i=0;i<nurseNames.length;i++){

@@ -1,6 +1,6 @@
 
 
-var processFile=function() {
+var processFile=function(elemId) {
     console.log("processing file")
     var loadedData=[];
     var fileSize = 0;
@@ -13,7 +13,7 @@ var processFile=function() {
      //check if browser support FileReader
         if (typeof (FileReader) != "undefined") {
        //get table element
-        var myTable = document.getElementById("myTable");
+        var myTable = document.getElementById(elemId);
         var headerLine = "";
         //create html5 file reader object
         var myReader = new FileReader();

@@ -4,13 +4,16 @@ var wardsview=function(){
     var touchedElementId="nothing";
     // creating HTML elements for content
     var column1=document.getElementById("column1")
+    column1.style="width:69%";
     column1.innerHTML="Schedule <br>";
     var content=document.createElement("div");
-    content.innerHTML="<p>Drag the nurses into wards:</p>";
+    content.innerHTML="<p>Assign the nurses into wards:</p>";
     content.id="content";
     column1.appendChild(content);
     // creating HTML elements for content
     var column2=document.getElementById("column2")
+    column2.hidden=false;
+    column2.style="width:25%";
     column2.innerHTML="Unallocated <br>";
     var unalloted=document.createElement("div");
     unalloted.id="ward0";
@@ -102,7 +105,6 @@ var wardsview=function(){
                     console.log("Touched element is:"+touchedElementId);
                 });
             let allocatedWardForNurse=document.getElementById("ward"+nurses[i].allotment)
-            console.log("ward"+nurses[i].allotment)
             allocatedWardForNurse.appendChild(nursediv);
         }
     }

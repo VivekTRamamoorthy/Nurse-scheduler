@@ -43,12 +43,17 @@ var instructionview=function(){
     t=t.concat("<li> No cookies are used either. </li>");
 
     column1.innerHTML=t;
+    
     // creating HTML elements for content
     var column2=document.getElementById("column2")
-    column2.innerHTML="Sidebar <br>";
-    var unalloted=document.createElement("div");
-    unalloted.id="unalloted";
-    unalloted.innerHTML="";
-    column2.appendChild(unalloted);
-
-    }
+    column2.innerHTML="";
+    column2.hidden=true;
+    column1.style="width=90%"
+    
+    
+    // HIDE SIDEBAR
+    column1.style="width:90%";
+    column2.hidden=true;
+    column2.style="width:25%";
+    
+}

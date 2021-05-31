@@ -5,11 +5,12 @@ var nurseview=function(){
     var column1=document.getElementById("column1")
     column1.innerHTML="Schedule <br>";
     var content=document.createElement("div");
-    content.innerHTML="<p>Drag or touch-touch the wards into nurses:</p>";
+    content.innerHTML="<p>Select the wards on the right and assign into nurses:</p>";
     content.id="content";
     column1.appendChild(content);
     // creating HTML elements for column 2
     var column2=document.getElementById("column2")
+
     column2.innerHTML="Ward List <br>";
     var sidebar=document.createElement("div");
     sidebar.id="sidebar";
@@ -18,6 +19,11 @@ var nurseview=function(){
     sidebar.ondragover=function(event){allowDrop(event)};
     column2.appendChild(sidebar);
     touchedElementId="ward0";
+
+    // UNHIDE SIDEBAR
+    column1.style="width:65%";
+    column2.hidden=false;
+    column2.style="width:25%";
 
     // ADDING NURSES
     for(let i=0;i<nurseNames.length;i++){
