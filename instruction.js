@@ -12,7 +12,7 @@ var instructionview=function(){
 
     t=t.concat("<h2>Getting Started </h2> \n");
     t=t.concat("<li>This is a tool to allocate nurses to different hospital wards.  </li> ");
-    t=t.concat("<li>To start using go to HOSPITAL VIEW. </li> \n");
+    t=t.concat("<li>To start using, go to HOSPITAL VIEW. </li> \n");
 
     t=t.concat("<h2>Instructions: </h2> \n");
 

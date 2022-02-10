@@ -1,7 +1,12 @@
+*,*::before,*::after{
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Geneva, Verdana, Tahoma, sans-serif;
   font-size: small;
-  
+  background-color: white;
+  padding:2em;
 }
 
 
@@ -23,22 +28,32 @@ width: 35vw;
 
 }
 
-#navbar  {
-  margin: 2px;
-overflow: hidden;
-float: left;
+nav  {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+  margin:1em;
   }
-#navbar button {
+nav button {
 background-color: black;
-color: white;
+height: 2rem;
+color: yellow;
+}
+.content-box{
+  display: flex;
+  flex-direction: row;
+
 }
 
-#column1 {
+#content {
   overflow:scroll;
   float: left;
   min-height:600px;
 }
-#column2 {
+#sidebar {
   overflow:scroll;
   border: 2px solid black;
   background: lightsalmon;
