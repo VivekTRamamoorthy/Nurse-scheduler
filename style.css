@@ -27,7 +27,6 @@ width: 35vw;
   margin: 2px;
 overflow: hidden;
 float: left;
-background-color: gray;
   }
 #navbar button {
 background-color: black;
@@ -137,7 +136,7 @@ color: white;
 }
 
 .warddiv {
-  min-width: 40%;
+  min-width: 90%;
   max-width:90%;
   /* height: px; */
   margin: 1% ; 
@@ -148,10 +147,10 @@ color: white;
   overflow: hidden;
 }
 .wardbox {
-  width: auto;
+  width: 30%;
   min-height: 25px;
   padding: 5px;
-  /* float: left; */
+  float: left;
   margin:5px;
   /* display:inline; */
   border: 1px solid #aaaaaa;

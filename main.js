@@ -4,7 +4,6 @@
 // Creates the instances of wards and nurses
 
 
-
 var wardNames=["NONE","WARD I ",
 "WARD II ",
 "WARD III ",
@@ -52,7 +51,7 @@ for(let i=0;i<wardNames.length;i++){
     wards[i]=new Ward(wardNames[i]);
 }
 
-wards[0].shifts=0;
+wards[0].shifts=1;
 // adding nurses
 var nurses=[];
 for(let i=0;i<nurseNames.length;i++){
