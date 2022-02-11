@@ -12,7 +12,7 @@ var wardNames=["NONE","WARD I ",
 "COVIDI"];
 
 
-var nurseNames=["albert", "alice","bob","emma","luke","max","pierre","sean"]
+var nurseNames=["Albert", "Emma","Luke","Max","Pierre","Sean","Mohammed", "Nirmal","Alice","Bob", "Raj","Seetha","Dolica","Helena", "Alfaruqi", "Wessel", "Jordan", "Emily", "Davide", "Camila", "Lynette", "Hadi", "Alex" ]
 
 
 
@@ -52,10 +52,12 @@ for(let i=0;i<wardNames.length;i++){
 }
 
 wards[0].shifts=1;
+
 // adding nurses
 var nurses=[];
 for(let i=0;i<nurseNames.length;i++){
     nurses[i]=new Nurse(10000+i,nurseNames[i]);
 }
+
 
 

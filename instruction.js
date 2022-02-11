@@ -3,6 +3,7 @@
 var instructionview=function(){
     // creating HTML elements for content
     var column1=document.getElementById("column1")
+    column1.style="grid-column: 1 / span 2;";
 
     // HOME PAGE HTML TEXT
     var t="";
@@ -48,12 +49,12 @@ var instructionview=function(){
     var column2=document.getElementById("column2")
     column2.innerHTML="";
     column2.hidden=true;
-    column1.style="width=90%"
+    // column1.style="width=90%"
     
     
     // HIDE SIDEBAR
-    column1.style="width:90%";
+    // column1.style="width:90%";
     column2.hidden=true;
-    column2.style="width:25%";
+    // column2.style="width:25%";
     
 }

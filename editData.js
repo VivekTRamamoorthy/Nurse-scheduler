@@ -3,24 +3,27 @@
 var editData=function(){
     // creating HTML elements for column 1
     var column1=document.getElementById("column1")
-    column1.innerHTML="<h2>Schedule</h2> <br>";
+    column1.innerHTML="<h2>EDIT NURSES AND WARDS</h2> <br>";
     var content=document.createElement("div");
-    content.id="content";
+    content.classList.add("content");
     column1.appendChild(content);
     
     // creating HTML elements for column 2
     var column2=document.getElementById("column2")
     
     // HIDE SIDEBAR
-    column1.style="width:auto";
+    column1.style="grid-column: 1 / span 2;";
     column2.hidden=true;
     
-    
+    var buttonsDiv= document.createElement("div");
+    buttonsDiv.classList.add("buttonsDiv");
     // UPDATE BUTTON
     updateButton=document.createElement("button");
     updateButton.innerText="UPDATE";
+    updateButton.classList.add('updateBtn')
     updateButton.onclick=function(){updateNurses();}
-    content.appendChild(updateButton);
+    buttonsDiv.appendChild(updateButton);
+    content.appendChild(buttonsDiv);
     
     
     
@@ -35,7 +38,7 @@ var editData=function(){
     var nurseTable=document.createElement("table");
     var nurseTableDiv=document.createElement("div");
     nurseTableDiv.classList.add("tableEditDiv")
-    nurseTableDiv.innerHTML="EDIT NURSES: <br>"
+    nurseTableDiv.innerHTML="<h3>EDIT NURSES </h3>"
     nurseTableDiv.appendChild(nurseTable);
     
     content.appendChild(nurseTableDiv);
@@ -71,15 +74,15 @@ var editData=function(){
     }
     // GAP
     var gap=document.createElement("div");
-    gap.innerHTML="<br><br><br>"; gap.style=" display:block;  overflow:auto;   height:auto;    width:95vw;";
+    gap.innerHTML="<br><br><br>"; 
     content.appendChild(gap);
 
     // ADD NURSE DIV
     addNursePopUp=document.createElement("div");
     addNursePopUp.id="addNursePopUp";
-    nameText='<h2>Add Nurse</h2> <label>Name</label> <input type="text" placeholder="Enter nurse name" value="New Nurse" id="addNurseInputName"> ';
+    nameText='<h2>Add Nurse</h2> <div class="editdata-add-div"> <label>Name</label> <input type="text" placeholder="Enter nurse name" value="New Nurse" id="addNurseInputName"> ';
     phoneText='<label>Phone</label> <input type="text" placeholder="Enter nurse name" value="00000" id="addNurseInputPhone"> ';
-    saveText='<button class="btn" onclick=addNurse(); >Add</button>';
+    saveText='<button class="btn" onclick=addNurse(); >Add</button> </div>';
     addNursePopUp.innerHTML=nameText+phoneText+saveText;
     content.appendChild(addNursePopUp)
     
@@ -87,14 +90,14 @@ var editData=function(){
     
     // GAP
     var gap=document.createElement("div");
-    gap.innerHTML="<br><br><br>"; gap.style=" display:block;  overflow:auto;   height:auto;    width:95vw;";
+    gap.innerHTML="<br><br><br>";
     content.appendChild(gap);
     
     // HEADING FOR WARD EDIT
     var wardTable=document.createElement("table");
     var wardTableDiv=document.createElement("div");
     wardTableDiv.classList.add("tableEditDiv");
-    wardTableDiv.innerHTML="EDIT WARDS: <br>"
+    wardTableDiv.innerHTML="<h3>EDIT WARDS</h3>"
     wardTableDiv.appendChild(wardTable);
     
     content.appendChild(wardTableDiv);
@@ -110,7 +113,7 @@ var editData=function(){
         // WARD No
         thisCell=document.createElement("td");
         thisRow.appendChild(thisCell);
-        thisCell.innerText=(i+1).toString();
+        thisCell.innerText=(i).toString();
         // WARD Name (editable)
         thisCell=document.createElement("td");
         wardNameInput=document.createElement("input");
@@ -131,16 +134,16 @@ var editData=function(){
     }
     
     
-        // ADD WARDS DIV
-        addWardPopUp=document.createElement("div");
-        addWardPopUp.id="addWardPopUp";
-        nameText='<h2>Add Ward</h2> <label>Name</label> <input type="text" placeholder="Enter Ward name" value="New Ward" id="addWardInputName"> ';
-        shiftsText='<label>Shifts</label> <select id="addWardInputShifts"> <option value="1">1</option> <option value="3">3</option>  </select>';
-        saveText='<button class="btn" onclick=addWard(); >Add</button>';
-        addWardPopUp.innerHTML=nameText+shiftsText+saveText;
-        content.appendChild(addWardPopUp)
-        
-        
+    // ADD WARDS DIV
+    addWardPopUp=document.createElement("div");
+    addWardPopUp.id="addWardPopUp";
+    nameText='<h2>Add Ward</h2> <div class="editdata-add-div"> <label>Name</label> <input type="text" placeholder="Enter Ward name" value="New Ward" id="addWardInputName"> ';
+    shiftsText='<label>Shifts</label> <select id="addWardInputShifts"> <option value="1">1</option> <option value="3">3</option>  </select>';
+    saveText='<button class="btn" onclick=addWard(); >Add</button> </div>';
+    addWardPopUp.innerHTML=nameText+shiftsText+saveText;
+    content.appendChild(addWardPopUp)
+    
+    
     
     
     
@@ -188,7 +191,7 @@ var addNurse=function(){
 var addWard=function(){
     let ward=document.getElementById("addWardInputName");
     let shifts=document.getElementById("addWardInputShifts");
-    wardNames.push(name.value);
+    wardNames.push(ward.value);
     length=wards.length;
     wards.push(new Ward(ward.value,shifts.value));
     editData();

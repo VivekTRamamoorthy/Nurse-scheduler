@@ -3,7 +3,7 @@ var loadData=function(){
     // COLUMN 1
     var column1=document.getElementById("column1");
     var textHTML="<h2>Load from CSV </h2> \n";
-    textHTML=textHTML.concat("<li> This static site does not store any information entered by the user </li><br>");
+    textHTML=textHTML.concat("<div> This static site does not store any information entered by the user </div>");
     column1.innerHTML=textHTML;
     
     // COLUMN 2
@@ -11,26 +11,23 @@ var loadData=function(){
     column2.innerHTML="";
     
     // HIDE SIDEBAR
-    column1.style="width:95%";
+    column1.style="grid-column: 1 / span 2;";
     column2.hidden=true;
-    column2.style="width:25%";
     
     // UPLOAD AND PARSE CSV FILES
     var loadedData;
     var inputFileDiv= document.createElement("div");
+    inputFileDiv.innerHTML="<label for='myFile'>1. Upload CSV</label>"
+    inputFileDiv.classList.add("inputFileDiv");
     var inputFileElement= document.createElement("input"); // upload file button
     inputFileElement.type="file";
     inputFileElement.id="myFile";
+    inputFileElement.hidden=true;
     inputFileDiv.appendChild(inputFileElement);
-    
-    // GAP
-    var gap=document.createElement("div");
-    gap.innerHTML="<br>"
-    inputFileDiv.appendChild(gap);
-    
+      
     // PREVIEW FILE BUTTON
     var previewFileButton=document.createElement("button"); 
-    previewFileButton.innerText="Preview file";
+    previewFileButton.innerText="2. Preview file";
     previewFileButton.id="previewBtn";
     inputFileDiv.appendChild(previewFileButton);
     
@@ -53,7 +50,7 @@ var loadData=function(){
 
     // ACCEPT FILE BUTTON
     var acceptFileButton=document.createElement("button");     
-    acceptFileButton.innerText="Accept";
+    acceptFileButton.innerText="3. Accept";
     acceptFileButton.id="acceptBtn";
     acceptFileButton.onclick=function(){
         // ACCEPT FILE FUNCTION
@@ -75,6 +72,8 @@ var loadData=function(){
             wards[allotment].allotment.push(i);
         }
         console.log("loaded csv data...")
+        window.alert("Loaded data from CSV!")
+        wardsview()
     }
     inputFileDiv.appendChild(acceptFileButton);  
     
@@ -82,6 +81,7 @@ var loadData=function(){
     var gap=document.createElement("div");
     gap.innerHTML="<br><br>"
     inputFileDiv.appendChild(gap);
+    column1.appendChild(inputFileDiv);
     
     // PREVIEW TABLE ELEMENT
     var previewTableDiv=document.createElement("div");
@@ -90,9 +90,8 @@ var loadData=function(){
     previewTable.id="myTable";
     previewTable.innerText='Preview pane';
     previewTableDiv.appendChild(previewTable)
-    inputFileDiv.appendChild(previewTableDiv);
+    column1.appendChild(previewTableDiv);
     
-    column1.appendChild(inputFileDiv);
 }
 
 

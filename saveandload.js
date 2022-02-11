@@ -5,6 +5,7 @@
 var saveData=function(){
     // creating HTML elements for content
     var column1=document.getElementById("column1")
+    column1.style="";
     var textHTML="<h2>Save progress </h2> \n";
     textHTML=textHTML.concat("<li>IMPORTANT: SAVE FREQUENTLY! </li> ");
     textHTML=textHTML.concat("<li>REFRESHING WILL DISCARD ALL PROGRESS  </li>");
@@ -13,36 +14,35 @@ var saveData=function(){
     var column2=document.getElementById("column2");
     
     // HIDE SIDEBAR
-    column1.style="width:auto";
+    column1.style="grid-column: 1 / span 2";
     column2.hidden=true;
-    column2.style="width:25%";
+    // column2.style="width:25%";
     
-    
+    // BUTTONS DIV
+    var buttonsDiv= document.createElement("div");
+    buttonsDiv.classList.add("buttonsDiv");
     // DOWNLOAD CSV BUTTON
     var savebutton=document.createElement('button');
     savebutton.innerText="Save CSV";
     savebutton.onclick=function(){
-        var output=[];
+        var output=[['Nurse no', 'Nurse name', 'Ward no', 'Ward allocated']];
         for(let i=0;i<nurseNames.length;i++){
-            output[i]=[i,nurseNames[i],nurses[i].allotment,wardNames[nurses[i].allotment]];
+            output[i+1]=[i+1,nurseNames[i],nurses[i].allotment,wardNames[nurses[i].allotment]];
             
         }
         console.log(output)
         download_csv(output);
     };
-    column1.appendChild(savebutton);
+    buttonsDiv.appendChild(savebutton);
 
     // PRINT SCHEDULE as PDF
     tablePrintButton=document.createElement("button");
-    tablePrintButton.onclick=function(){PrintElem("tableDiv")};
+    tablePrintButton.onclick=function(){PrintElem("saveTableDiv")};
     tablePrintButton.innerText="Print PDF";
     
-    column1.appendChild(tablePrintButton);
+    buttonsDiv.appendChild(tablePrintButton);
+    column1.appendChild(buttonsDiv);
     
-    // GAP
-    var gap=document.createElement("div");
-    gap.innerHTML="<br><br>"
-    column1.appendChild(gap);
 
     // PRINT DATA TABLE ON SCREEN
     print_table();
@@ -101,7 +101,7 @@ function download_csv(out) {
 function print_table(){
     var tableDiv=document.createElement("div");
     tableDiv.innerHTML="";
-    tableDiv.id="tableDiv";
+    tableDiv.id="saveTableDiv";
     let tableElement=document.createElement("table");
     
     let tableheader=document.createElement("tr");
@@ -139,7 +139,7 @@ function print_table(){
     // Table print button
 
     tablePrintButton=document.createElement("button");
-    tablePrintButton.onclick=function(){PrintElem("tableDiv")};
+    tablePrintButton.onclick=function(){PrintElem("saveTableDiv")};
     tablePrintButton.innerText="Print this table";
     
     column1.appendChild(tablePrintButton);

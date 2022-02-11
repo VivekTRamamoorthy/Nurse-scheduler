@@ -2,16 +2,42 @@
 // NURSE VIEW
 var nurseview=function(){
     // creating HTML elements for column 1
-    var column1=document.getElementById("column1")
-    column1.innerHTML="Schedule <br>";
+    var column1=document.getElementById("column1");
+    column1.innerHTML="<h2> NURSE VIEW <br></h2><p>Apply the wards on to nurses:</p> <br>   ";
+    
+    // Automated scheduling
+    var buttonsDiv= document.createElement("div");
+    buttonsDiv.classList.add("buttonsDiv");
+    var randomAllocateElem = document.createElement("button");
+    randomAllocateElem.innerText= "Random";
+    randomAllocateElem.onclick = function(){randomAllocate(); nurseview();};
+    buttonsDiv.appendChild(randomAllocateElem)
+    
+    var randomremAllocateElem = document.createElement("button");
+    randomremAllocateElem.innerText= "Randomise remaining";
+    randomremAllocateElem.onclick = function(){randomremAllocate(); nurseview();};
+    buttonsDiv.appendChild(randomremAllocateElem)
+    
+    var evenAllocateElem = document.createElement("button");
+    evenAllocateElem.innerText= "Even";
+    evenAllocateElem.onclick = function(){evenAllocate(); nurseview();};
+    buttonsDiv.appendChild(evenAllocateElem)
+    
+    var resetAllocateElem = document.createElement("button");
+    resetAllocateElem.innerText= "Reset";
+    resetAllocateElem.onclick = function(){resetAllocations(); nurseview();};
+    buttonsDiv.appendChild(resetAllocateElem)
+    column1.appendChild(buttonsDiv)
+    
+    
     var content=document.createElement("div");
-    content.innerHTML="<p>Select the wards on the right and assign into nurses:</p>";
-    content.id="content";
+    content.innerHTML="<div class='nursediv'> <div class='nursecontentbox-name'> Name</div>   <div class='nursecontentbox-name'> Ward</div>   <div class='nursecontentbox-shift'> Shift </div></div> ";
+    content.classList.add("nurseview-nurselist-container");
     column1.appendChild(content);
     // creating HTML elements for column 2
     var column2=document.getElementById("column2")
-
-    column2.innerHTML="Ward List <br>";
+    
+    column2.innerHTML="<h2>Ward List </h2> <br>";
     var sidebar=document.createElement("div");
     sidebar.id="sidebar";
     sidebar.innerHTML="";
@@ -19,25 +45,24 @@ var nurseview=function(){
     sidebar.ondragover=function(event){allowDrop(event)};
     column2.appendChild(sidebar);
     touchedElementId="ward0";
-
+    
     // UNHIDE SIDEBAR
-    column1.style="width:65%";
+    column1.style="";
     column2.hidden=false;
-    column2.style="width:25%";
-
+    
     // ADDING NURSES
     for(let i=0;i<nurseNames.length;i++){
         // NURSE NAME
         nursediv=document.createElement("div");
         nursediv.classList.add("nursediv")
-        nursenamediv=document.createElement("span");
+        nursenamediv=document.createElement("div");
         nursenamediv.innerText=(i+1).toString()+". "+nurses[i].name+" ";
-        nursenamediv.classList.add("nursecontentbox")
+        nursenamediv.classList.add("nursecontentbox-name")
         nursediv.appendChild(nursenamediv);
-
+        
         // NURSE BOX
-        nursebox=document.createElement("span");
-        nursebox.classList.add("nursecontentbox");
+        nursebox=document.createElement("div");
+        nursebox.classList.add("nursecontentbox-ward");
         nursebox.id="nurse"+i.toString();
         nurses[i].id=nursediv.id;
         wardNo=nurses[i].allotment;
@@ -67,12 +92,23 @@ var nurseview=function(){
                 console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
             }   
         })
+        nursebox.addEventListener('click',function(event){
+            let targetId=event.target.id;
+            if(touchedElementId.substr(0,4)=="ward" && targetId.substr(0,5)=="nurse"){
+                console.log("A touch event has occured on a nurse")
+                event.preventDefault();
+                let wardNo=parseInt(touchedElementId.substring(4));
+                let nurseNo=parseInt(targetId.substring(5));
+                event.target.innerText=wardNames[wardNo];
+                nurses[nurseNo].allotment=wardNo;
+                console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
+            }   
+        })
         nursediv.appendChild(nursebox);
         
         // NURSE SHIFT
         nurseshiftdiv=document.createElement("div");
-        nurseshiftdiv.classList.add("nursecontentbox");
-        nurseshiftdiv.style.width="20%"
+        nurseshiftdiv.classList.add("nursecontentbox-shift");
         nurseshift=document.createElement("select");
         if (wards[nurses[i].allotment].shifts==1){
             nurseshift.innerHTML="<option value='1'>1</option>";
@@ -85,45 +121,58 @@ var nurseview=function(){
         nurseshiftdiv.appendChild(nurseshift);
         nursediv.appendChild(nurseshiftdiv);
         
-
-
+        
+        
         content.appendChild(nursediv);
-
-        }
-
-        // CREATING WARDS
-        var warddiv;
-        var sidebar=document.getElementById("sidebar");
-        for(let i=0;i<wards.length;i++){
-            warddiv=document.createElement("div");
-            warddiv.innerText=wards[i].name;
-            warddiv.classList.add("nurse");
-            warddiv.draggable="true";
-            warddiv.id="ward"+i.toString();
-            // DRAG 
-            warddiv.ondragstart=function(event){
-                event.dataTransfer.setData("text", event.target.id);
-                previoustouchedElementId=touchedElementId;
-                document.getElementById(previoustouchedElementId).style="";
-                touchedElementId= event.target.id;
-                document.getElementById(touchedElementId).style="border: 2px solid red";
-
-                console.log("Touched element is:"+touchedElementId);
-            };
-            // TOUCH
-            warddiv.addEventListener('touchstart',function(event){
-                let targetId=event.target.id;
-                if (targetId.substr(0,4)=="ward"){
-                    event.preventDefault();}
-                    previoustouchedElementId=touchedElementId;
-                    document.getElementById(previoustouchedElementId).style="";
-                    touchedElementId= event.target.id;
-                    document.getElementById(touchedElementId).style="border: 2px solid red";
-                    console.log("Touched element is:"+touchedElementId);
-                });
-            sidebar.appendChild(warddiv);
-        }
+        
     }
+    
+    // CREATING WARDS
+    var warddiv;
+    var sidebar=document.getElementById("sidebar");
+    for(let i=0;i<wards.length;i++){
+        warddiv=document.createElement("div");
+        warddiv.innerText=wards[i].name;
+        warddiv.classList.add("nurse");
+        warddiv.draggable="true";
+        warddiv.id="ward"+i.toString();
+        // DRAG 
+        warddiv.ondragstart=function(event){
+            event.dataTransfer.setData("text", event.target.id);
+            previoustouchedElementId=touchedElementId;
+            document.getElementById(previoustouchedElementId).classList.remove("touched");
+            touchedElementId= event.target.id;
+            document.getElementById(touchedElementId).classList.remove('touched');
+            
+            console.log("Touched element is:"+touchedElementId);
+        };
+        // TOUCH
+        warddiv.addEventListener('touchstart',function(event){
+            let targetId=event.target.id;
+            if (targetId.substr(0,4)=="ward"){
+                event.preventDefault();
+            }
+            previoustouchedElementId=touchedElementId;
+            document.getElementById(previoustouchedElementId).classList.remove("touched");
+            touchedElementId= event.target.id;
+            document.getElementById(touchedElementId).classList.add('touched');
+            console.log("Touched element is:"+touchedElementId);
+        });
+        warddiv.addEventListener('click',function(event){
+            let targetId=event.target.id;
+            if (targetId.substr(0,4)=="ward"){
+                event.preventDefault();
+            }
+            previoustouchedElementId=touchedElementId;
+            document.getElementById(previoustouchedElementId).classList.remove("touched");
+            touchedElementId= event.target.id;
+            document.getElementById(touchedElementId).classList.add('touched');
+            console.log("Touched element is:"+touchedElementId);
+        });
+        
+        sidebar.appendChild(warddiv);
+    }
+}
 
 
 
