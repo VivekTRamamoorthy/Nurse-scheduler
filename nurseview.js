@@ -3,7 +3,7 @@
 var nurseview=function(){
     // creating HTML elements for column 1
     var column1=document.getElementById("column1");
-    column1.innerHTML="<h2> NURSE VIEW <br></h2><p>Apply the wards on to nurses:</p> <br>   ";
+    column1.innerHTML="<h2> NURSE VIEW <br></h2><p>Apply the wards on to nurses by dragging and dropping (or) click and click.</p> <br>   ";
     
     // Automated scheduling
     var buttonsDiv= document.createElement("div");
