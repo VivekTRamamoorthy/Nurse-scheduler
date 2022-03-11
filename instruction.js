@@ -13,7 +13,7 @@ var instructionview=function(){
     t=t.concat("When COVID cases peaked in India, several nurses would call in sick or had to take care of a family member who was sick. ")
     t=t.concat("It was difficult to reallocate nurses and send out the revised schedule on the fly. New nurses were hired to reduce the workload but this made managing the schedules more difficult.")
     t=t.concat(" Hence, I created this web tool to help her. <br><br> ")
-    t=t.concat("Luckily, she no longer needs to use this. But it is available for anyone to use or build upon. \n");
+    t=t.concat("Luckily, she no longer needs to use this. But it is available for anyone to use or <a href='https://www.github.com/VivekTRamamoorthy/NurseScheduler'>build upon</a>. \n");
 
     t=t.concat("<h2>Getting Started </h2> \n");
     t=t.concat("<li>This is a tool to allocate nurses to different hospital wards.  </li> ");
