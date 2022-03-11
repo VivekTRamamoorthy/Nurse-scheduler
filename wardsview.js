@@ -81,7 +81,7 @@ var wardsview=function(){
         };
         wardbox.addEventListener('touchstart',function(event){
             let targetId=event.target.id;
-            if(touchedElementId.substr(0,5)=="nurse" && targetId.substr(0,4)=="ward"){
+            if(touchedElementId.substring(0,5)=="nurse" && targetId.substring(0,4)=="ward"){
                 // console.log(event)
                 // console.log("A touch event has occured on a ward")
                 event.preventDefault();
@@ -102,7 +102,7 @@ var wardsview=function(){
         })
         wardbox.addEventListener('click',function(event){
             let targetId=event.target.id;
-            if(touchedElementId.substr(0,5)=="nurse" && targetId.substr(0,4)=="ward"){
+            if(touchedElementId.substring(0,5)=="nurse" && targetId.substring(0,4)=="ward"){
                 // console.log(event)
                 // console.log("A touch event has occured on a ward")
                 event.preventDefault();
@@ -193,7 +193,7 @@ var wardsview=function(){
     };
     unalloted.addEventListener('touchstart',function(event){
         let targetId=event.target.id;
-        if(touchedElementId.substr(0,5)=="nurse" && targetId.substr(0,4)=="ward"){
+        if(touchedElementId.substring(0,5)=="nurse" && targetId.substring(0,4)=="ward"){
         // console.log(event)
         // console.log("A touch event has occured on a ward")
         event.preventDefault();
@@ -214,7 +214,7 @@ var wardsview=function(){
     })
     unalloted.addEventListener('click',function(event){
         let targetId=event.target.id;
-        if(touchedElementId.substr(0,5)=="nurse" && targetId.substr(0,4)=="ward"){
+        if(touchedElementId.substring(0,5)=="nurse" && targetId.substring(0,4)=="ward"){
         // console.log(event)
         // console.log("A touch event has occured on a ward")
         event.preventDefault();
@@ -254,7 +254,7 @@ function drop(ev) {
     ev.preventDefault();
     let targetId=ev.target.id;
     touchedElementId = ev.dataTransfer.getData("text");
-    if(touchedElementId.substr(0,5)=="nurse" && targetId.substr(0,4)=="ward"){
+    if(touchedElementId.substring(0,5)=="nurse" && targetId.substring(0,4)=="ward"){
         ev.target.appendChild(document.getElementById(touchedElementId));
         let wardNo=parseInt(targetId.substring(4));
         let nurseNo=parseInt(touchedElementId.substring(5));
