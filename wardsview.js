@@ -96,6 +96,8 @@ var wardsview=function(){
             nurses[nurseNo].allotment=wardNo;
             console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
             touchedElementId="nothing";
+            let allnursedivs = document.querySelectorAll(".nurse")
+            allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
             }   
         })
         wardbox.addEventListener('click',function(event){
@@ -115,6 +117,8 @@ var wardsview=function(){
             nurses[nurseNo].allotment=wardNo;
             console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
             touchedElementId="nothing";
+            let allnursedivs = document.querySelectorAll(".nurse")
+            allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
             }   
         })
 
@@ -142,6 +146,9 @@ var wardsview=function(){
             nursediv.ondragstart=function(event){
                 event.dataTransfer.setData("text", event.target.id);
                 touchedElementId= event.target.id;
+                let allnursedivs = document.querySelectorAll(".nurse")
+                allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
+                document.getElementById(touchedElementId).classList.add('touched');
                 console.log("Touched element is:"+touchedElementId);
             };
             // For mobile
@@ -151,6 +158,9 @@ var wardsview=function(){
                     event.preventDefault();
                 }
                 touchedElementId= event.target.id;
+                let allnursedivs = document.querySelectorAll(".nurse")
+                allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
+                document.getElementById(touchedElementId).classList.add('touched');
                 console.log("Touched element is:"+touchedElementId);
             });
             nursediv.addEventListener('click',function(event){
@@ -159,6 +169,9 @@ var wardsview=function(){
                     event.preventDefault();
                 }
                 touchedElementId= event.target.id;
+                let allnursedivs = document.querySelectorAll(".nurse")
+                allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
+                document.getElementById(touchedElementId).classList.add('touched');
                 console.log("Touched element is:"+touchedElementId);
             });
             let allocatedWardForNurse=document.getElementById("ward"+nurses[i].allotment)
