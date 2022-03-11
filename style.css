@@ -6,7 +6,7 @@ body {
   font-family: Geneva, Verdana, Tahoma, sans-serif;
   font-size: small;
   background-color: beige;
-  margin: 0;;
+  margin: 0;
 }
 
 header{
@@ -234,6 +234,10 @@ nav button {
 
 table, th, td {
   border: 1px solid black;
+  
+}
+table{
+  width:100%;
 }
 
 
@@ -257,7 +261,8 @@ table, th, td {
   padding: 1rem;
 }
 .tableEditDiv table{
-  width:clamp(300px,70vh,700px);
+  /* width:clamp(300px,70vh,700px); */
+  max-width: 800px;
 }
 .tableEditDiv table input, .tableEditDiv table select{
   width: 100%;
