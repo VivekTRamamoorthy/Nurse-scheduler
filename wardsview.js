@@ -3,7 +3,7 @@ var wardsview=function(){
     var touchedElementId="nothing";
     // creating HTML elements for content
     var column1=document.getElementById("column1");
-    column1.innerHTML="<h2> HOSPITAL VIEW </h2><p>Drag the nurses into wards or click the automatic allocation scheme below:</p> ";
+    column1.innerHTML="<h2> HOSPITAL VIEW </h2> <p>Drag the nurses into wards. In mobile, click nurse and click on ward.<br> Or Select the automatic allocation buttons below:</p> ";
     
     // Automated scheduling
     var buttonsDiv= document.createElement("div");
