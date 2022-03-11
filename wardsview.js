@@ -12,23 +12,23 @@ var wardsview=function(){
     randomAllocateElem.innerText= "Random";
     randomAllocateElem.onclick = function(){randomAllocate(); wardsview();};
     buttonsDiv.appendChild(randomAllocateElem)
-
+    
     var randomremAllocateElem = document.createElement("button");
     randomremAllocateElem.innerText= "Randomise remaining";
     randomremAllocateElem.onclick = function(){randomremAllocate(); wardsview();};
     buttonsDiv.appendChild(randomremAllocateElem)
-
-
+    
+    
     var evenAllocateElem = document.createElement("button");
     evenAllocateElem.innerText= "Even";
     evenAllocateElem.onclick = function(){evenAllocate(); wardsview();};
     buttonsDiv.appendChild(evenAllocateElem)
-
+    
     var resetAllocateElem = document.createElement("button");
     resetAllocateElem.innerText= "Reset";
     resetAllocateElem.onclick = function(){resetAllocations(); wardsview();};
     buttonsDiv.appendChild(resetAllocateElem)
-
+    
     column1.appendChild(buttonsDiv);
     
     // CONTENTS
@@ -49,9 +49,9 @@ var wardsview=function(){
     // UNHIDE SIDEBAR
     column1.style="";
     column2.hidden=false;
-
-
-
+    
+    
+    
     
     // adding wards
     // var wards=[]
@@ -82,127 +82,184 @@ var wardsview=function(){
         wardbox.addEventListener('touchstart',function(event){
             let targetId=event.target.id;
             if(touchedElementId.substr(0,5)=="nurse" && targetId.substr(0,4)=="ward"){
-            // console.log(event)
-            // console.log("A touch event has occured on a ward")
-            event.preventDefault();
-            // let touchedId = event.dataTransfer.getData("text");
-            // console.log(touchedElementId);
-            event.target.appendChild(document.getElementById(touchedElementId));
-
-            // console.log(targetId);
-            let wardNo=parseInt(targetId.substring(4));
-            // console.log({wardNo})
-            let nurseNo=parseInt(touchedElementId.substring(5));
-            nurses[nurseNo].allotment=wardNo;
-            console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
-            touchedElementId="nothing";
-            let allnursedivs = document.querySelectorAll(".nurse")
-            allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
+                // console.log(event)
+                // console.log("A touch event has occured on a ward")
+                event.preventDefault();
+                // let touchedId = event.dataTransfer.getData("text");
+                // console.log(touchedElementId);
+                event.target.appendChild(document.getElementById(touchedElementId));
+                
+                // console.log(targetId);
+                let wardNo=parseInt(targetId.substring(4));
+                // console.log({wardNo})
+                let nurseNo=parseInt(touchedElementId.substring(5));
+                nurses[nurseNo].allotment=wardNo;
+                console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
+                touchedElementId="nothing";
+                let allnursedivs = document.querySelectorAll(".nurse")
+                allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
             }   
         })
         wardbox.addEventListener('click',function(event){
             let targetId=event.target.id;
             if(touchedElementId.substr(0,5)=="nurse" && targetId.substr(0,4)=="ward"){
-            // console.log(event)
-            // console.log("A touch event has occured on a ward")
-            event.preventDefault();
-            // let touchedId = event.dataTransfer.getData("text");
-            // console.log(touchedElementId);
-            event.target.appendChild(document.getElementById(touchedElementId));
-
-            // console.log(targetId);
-            let wardNo=parseInt(targetId.substring(4));
-            // console.log({wardNo})
-            let nurseNo=parseInt(touchedElementId.substring(5));
-            nurses[nurseNo].allotment=wardNo;
-            console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
-            touchedElementId="nothing";
-            let allnursedivs = document.querySelectorAll(".nurse")
-            allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
+                // console.log(event)
+                // console.log("A touch event has occured on a ward")
+                event.preventDefault();
+                // let touchedId = event.dataTransfer.getData("text");
+                // console.log(touchedElementId);
+                event.target.appendChild(document.getElementById(touchedElementId));
+                
+                // console.log(targetId);
+                let wardNo=parseInt(targetId.substring(4));
+                // console.log({wardNo})
+                let nurseNo=parseInt(touchedElementId.substring(5));
+                nurses[nurseNo].allotment=wardNo;
+                console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
+                touchedElementId="nothing";
+                let allnursedivs = document.querySelectorAll(".nurse")
+                allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
             }   
         })
-
-
+        
+        
         warddiv.appendChild(wardbox);
         content.appendChild(warddiv);
-
-
-
-        }
-
-        // Creating nurses
-        // var nurses=[]
-        // for(let i=0;i<nurseNames.length;i++){
-        //     nurses[i]=new Nurse(10000+i,nurseNames[i]);
-        // }
-        var nursediv;
-        var unalloted=document.getElementById("ward0");
-        for(let i=0;i<nurses.length;i++){
-            nursediv=document.createElement("div");
-            nursediv.innerText=nurses[i].name;
-            nursediv.classList.add("nurse");
-            nursediv.draggable="true";
-            nursediv.id="nurse"+i.toString();
-            nursediv.ondragstart=function(event){
-                event.dataTransfer.setData("text", event.target.id);
-                touchedElementId= event.target.id;
-                let allnursedivs = document.querySelectorAll(".nurse")
-                allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
-                document.getElementById(touchedElementId).classList.add('touched');
-                console.log("Touched element is:"+touchedElementId);
-            };
-            // For mobile
-            nursediv.addEventListener('touchstart',function(event){
-                a=event.target.id;
-                if (a[0]+a[1]+a[2]+a[3]+a[4]=="nurse"){
-                    event.preventDefault();
-                }
-                touchedElementId= event.target.id;
-                let allnursedivs = document.querySelectorAll(".nurse")
-                allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
-                document.getElementById(touchedElementId).classList.add('touched');
-                console.log("Touched element is:"+touchedElementId);
-            });
-            nursediv.addEventListener('click',function(event){
-                a=event.target.id;
-                if (a[0]+a[1]+a[2]+a[3]+a[4]=="nurse"){
-                    event.preventDefault();
-                }
-                touchedElementId= event.target.id;
-                let allnursedivs = document.querySelectorAll(".nurse")
-                allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
-                document.getElementById(touchedElementId).classList.add('touched');
-                console.log("Touched element is:"+touchedElementId);
-            });
-            let allocatedWardForNurse=document.getElementById("ward"+nurses[i].allotment)
-            allocatedWardForNurse.appendChild(nursediv);
-        }
-    }
-
-      
-    function allowDrop(ev) {
-        ev.preventDefault();
-    }
-    
-    function drag(ev) {
-        ev.dataTransfer.setData("text", ev.target.id);
-        console.log(ev.dataTransfer.getData("text"));
-        touchedElementId= ev.target.id;
-        console.log("Touched element is:"+touchedElementId);
-
+        
+        
         
     }
     
-    function drop(ev) {
-        ev.preventDefault();
-        let targetId=ev.target.id;
-        touchedElementId = ev.dataTransfer.getData("text");
-        if(touchedElementId.substr(0,5)=="nurse" && targetId.substr(0,4)=="ward"){
-            ev.target.appendChild(document.getElementById(touchedElementId));
-            let wardNo=parseInt(targetId.substring(4));
-            let nurseNo=parseInt(touchedElementId.substring(5));
-            nurses[nurseNo].allotment=wardNo;
-            console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
-        }
-    
+    // Creating nurses
+    // var nurses=[]
+    // for(let i=0;i<nurseNames.length;i++){
+    //     nurses[i]=new Nurse(10000+i,nurseNames[i]);
+    // }
+    var nursediv;
+    var unalloted=document.getElementById("ward0");
+    for(let i=0;i<nurses.length;i++){
+        nursediv=document.createElement("div");
+        nursediv.innerText=nurses[i].name;
+        nursediv.classList.add("nurse");
+        nursediv.draggable="true";
+        nursediv.id="nurse"+i.toString();
+        nursediv.ondragstart=function(event){
+            event.dataTransfer.setData("text", event.target.id);
+            touchedElementId= event.target.id;
+            let allnursedivs = document.querySelectorAll(".nurse")
+            allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
+            document.getElementById(touchedElementId).classList.add('touched');
+            console.log("Touched element is:"+touchedElementId);
+        };
+        // For mobile
+        nursediv.addEventListener('touchstart',function(event){
+            a=event.target.id;
+            if (a[0]+a[1]+a[2]+a[3]+a[4]=="nurse"){
+                event.preventDefault();
+            }
+            touchedElementId= event.target.id;
+            let allnursedivs = document.querySelectorAll(".nurse")
+            allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
+            document.getElementById(touchedElementId).classList.add('touched');
+            console.log("Touched element is:"+touchedElementId);
+        });
+        nursediv.addEventListener('click',function(event){
+            a=event.target.id;
+            if (a[0]+a[1]+a[2]+a[3]+a[4]=="nurse"){
+                event.preventDefault();
+            }
+            touchedElementId= event.target.id;
+            let allnursedivs = document.querySelectorAll(".nurse")
+            allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
+            document.getElementById(touchedElementId).classList.add('touched');
+            console.log("Touched element is:"+touchedElementId);
+        });
+        let allocatedWardForNurse=document.getElementById("ward"+nurses[i].allotment)
+        allocatedWardForNurse.appendChild(nursediv);
     }
+
+    // adding drop functionality to ward0 or unalloted div
+    unalloted.ondrop=function(event){ 
+        // event.preventDefault();
+        // let touchedId = event.dataTransfer.getData("text");
+        // console.log(touchedId);
+        // event.target.appendChild(document.getElementById(touchedId));
+        // let targetId=event.target.id;
+        // let wardNo=parseInt(targetId.substring(4));
+        // let nurseNo=parseInt(touchedElementId.substring(5));
+        // nurses[nurseNo].allotment=wardNo;
+        // console.log("new allotment made"+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
+        drop(event);
+    };
+    unalloted.addEventListener('touchstart',function(event){
+        let targetId=event.target.id;
+        if(touchedElementId.substr(0,5)=="nurse" && targetId.substr(0,4)=="ward"){
+        // console.log(event)
+        // console.log("A touch event has occured on a ward")
+        event.preventDefault();
+        // let touchedId = event.dataTransfer.getData("text");
+        // console.log(touchedElementId);
+        event.target.appendChild(document.getElementById(touchedElementId));
+
+        // console.log(targetId);
+        let wardNo=parseInt(targetId.substring(4));
+        // console.log({wardNo})
+        let nurseNo=parseInt(touchedElementId.substring(5));
+        nurses[nurseNo].allotment=wardNo;
+        console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
+        touchedElementId="nothing";
+        let allnursedivs = document.querySelectorAll(".nurse")
+        allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
+        }   
+    })
+    unalloted.addEventListener('click',function(event){
+        let targetId=event.target.id;
+        if(touchedElementId.substr(0,5)=="nurse" && targetId.substr(0,4)=="ward"){
+        // console.log(event)
+        // console.log("A touch event has occured on a ward")
+        event.preventDefault();
+        // let touchedId = event.dataTransfer.getData("text");
+        // console.log(touchedElementId);
+        event.target.appendChild(document.getElementById(touchedElementId));
+
+        // console.log(targetId);
+        let wardNo=parseInt(targetId.substring(4));
+        // console.log({wardNo})
+        let nurseNo=parseInt(touchedElementId.substring(5));
+        nurses[nurseNo].allotment=wardNo;
+        console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
+        touchedElementId="nothing";
+        let allnursedivs = document.querySelectorAll(".nurse")
+        allnursedivs.forEach(nursediv => nursediv.classList.remove("touched"))
+        }   
+    })
+
+}
+
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+    console.log(ev.dataTransfer.getData("text"));
+    touchedElementId= ev.target.id;
+    console.log("Touched element is:"+touchedElementId);
+    
+    
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    let targetId=ev.target.id;
+    touchedElementId = ev.dataTransfer.getData("text");
+    if(touchedElementId.substr(0,5)=="nurse" && targetId.substr(0,4)=="ward"){
+        ev.target.appendChild(document.getElementById(touchedElementId));
+        let wardNo=parseInt(targetId.substring(4));
+        let nurseNo=parseInt(touchedElementId.substring(5));
+        nurses[nurseNo].allotment=wardNo;
+        console.log("new allotment made: "+ nurseNames[nurseNo]+" to " +wardNames[wardNo])
+    }
+    
+}
