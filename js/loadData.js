@@ -3,9 +3,9 @@ var loadData=function(){
     // COLUMN 1
     var column1=document.getElementById("column1");
     var textHTML=`
-    <h2>Load from local</h2>
+    <h2>Load from browser local storage</h2>
     <div class="buttonsDiv">
-    <button id="loadlocal" onclick="loadLocalStorage()">Load from local</button>
+    <button id="loadlocal" onclick="loadLocalStorage()">Load local</button>
     <button id="loadlocal" onclick="clearLocalStorage()">Clear local</button>
     </div>
     <h2>Load from CSV </h2> 

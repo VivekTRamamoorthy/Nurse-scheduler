@@ -6,9 +6,16 @@ var saveData=function(){
     // creating HTML elements for content
     let column1=document.getElementById("column1")
     column1.style="";
-    let textHTML=`<h2>Save progress </h2> 
-    <li>IMPORTANT: SAVE FREQUENTLY! </li> 
-    <li>REFRESHING WILL DISCARD ALL PROGRESS  </li>
+    let textHTML=`
+    <h2>Save in browser local storage</h2>
+    <div class="buttonsDiv">
+        <button onclick="saveToLocalStorage()">Save Local</button>
+        <div class="autosaveDiv">
+        <label for="autosave">Autosave on exit:</label> <input type="checkbox" id="autosave" name="autosave"> 
+        </div>
+    </div>
+    <h2>Save as CSV </h2> 
+
     <br>`;
     column1.innerHTML=textHTML;
     let column2=document.getElementById("column2");
@@ -19,16 +26,9 @@ var saveData=function(){
     // column2.style="width:25%";
     
 
-    // BUTTONS DIV 2
+    // BUTTONS DIV
     let buttonsDiv= document.createElement("div");
     buttonsDiv.classList.add("buttonsDiv");
-    
-    // SAVE LOCAL BUTTON
-    saveLocalButton = 
-    saveLocalButton=document.createElement("button");
-    saveLocalButton.onclick=function(){saveToLocalStorage()};
-    saveLocalButton.innerText="Save Local";
-    buttonsDiv.appendChild(saveLocalButton);
 
 
     
@@ -59,15 +59,9 @@ var saveData=function(){
     column1.appendChild(buttonsDiv);
     
     
-    // AUTOSAVE CHECKBOX
-    let AutosaveDiv= document.createElement("div");
-    AutosaveDiv.classList.add("autosaveDiv");
-        //   <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">  <label for="vehicle1"> I have a bike</label><br></br>
-    let inputElem = document.createElement("input")
-    inputElem.type="checkbox"
-    inputElem.id="autosave"
-    inputElem.checked = false;
-    inputElem.oninput = ()=>{
+    // AUTOSAVE CHECKBOX CONTROLS
+    let checkbox = document.getElementById("autosave")
+    checkbox.oninput = ()=>{
         let autosaveBtn = document.getElementById("autosave")
         if(autosaveBtn.checked ===true){
         autosaveToggle = true;
@@ -78,15 +72,7 @@ var saveData=function(){
             console.log("Autosave; off");
         }
     };
-    labelElem=document.createElement("label")
-    labelElem.for = "autosave";
-    labelElem.innerText = "Autosave on exit:"
-    AutosaveDiv.appendChild(labelElem)
-    AutosaveDiv.appendChild(inputElem)
-
     
-    column1.appendChild(AutosaveDiv);
-
     // PRINT DATA TABLE ON SCREEN
     print_table();
     
