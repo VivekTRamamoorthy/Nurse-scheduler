@@ -2,8 +2,14 @@
 var loadData=function(){
     // COLUMN 1
     var column1=document.getElementById("column1");
-    var textHTML="<h2>Load from CSV </h2> \n";
-    textHTML=textHTML.concat("<div> This static site does not store any information entered by the user </div>");
+    var textHTML=`
+    <h2>Load from local</h2>
+    <div class="buttonsDiv">
+    <button id="loadlocal" onclick="loadLocalStorage()">Load from local</button>
+    <button id="loadlocal" onclick="clearLocalStorage()">Clear local</button>
+    </div>
+    <h2>Load from CSV </h2> 
+    <div> This static site does not store any information in a server </div>`;
     column1.innerHTML=textHTML;
     
     // COLUMN 2
@@ -57,7 +63,7 @@ var loadData=function(){
         console.log("loading csv data...")
         // nurses=[];wards=[]
         // nurseNames=[];wardNames=[];
-        row=0;
+        let row=0;
         for (let allrows = 1; allrows < loadedData.length; allrows++) {
             if(loadedData[allrows].length<4){break}
             row=row+1;

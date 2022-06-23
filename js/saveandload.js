@@ -4,28 +4,39 @@
 // INSTRUCTIONS VIEW
 var saveData=function(){
     // creating HTML elements for content
-    var column1=document.getElementById("column1")
+    let column1=document.getElementById("column1")
     column1.style="";
-    var textHTML="<h2>Save progress </h2> \n";
-    textHTML=textHTML.concat("<li>IMPORTANT: SAVE FREQUENTLY! </li> ");
-    textHTML=textHTML.concat("<li>REFRESHING WILL DISCARD ALL PROGRESS  </li>");
-    textHTML=textHTML.concat("<br>");
+    let textHTML=`<h2>Save progress </h2> 
+    <li>IMPORTANT: SAVE FREQUENTLY! </li> 
+    <li>REFRESHING WILL DISCARD ALL PROGRESS  </li>
+    <br>`;
     column1.innerHTML=textHTML;
-    var column2=document.getElementById("column2");
+    let column2=document.getElementById("column2");
     
     // HIDE SIDEBAR
     column1.style="grid-column: 1 / span 2";
     column2.hidden=true;
     // column2.style="width:25%";
     
-    // BUTTONS DIV
-    var buttonsDiv= document.createElement("div");
+
+    // BUTTONS DIV 2
+    let buttonsDiv= document.createElement("div");
     buttonsDiv.classList.add("buttonsDiv");
+    
+    // SAVE LOCAL BUTTON
+    saveLocalButton = 
+    saveLocalButton=document.createElement("button");
+    saveLocalButton.onclick=function(){saveToLocalStorage()};
+    saveLocalButton.innerText="Save Local";
+    buttonsDiv.appendChild(saveLocalButton);
+
+
+    
     // DOWNLOAD CSV BUTTON
-    var savebutton=document.createElement('button');
+    let savebutton=document.createElement('button');
     savebutton.innerText="Save CSV";
     savebutton.onclick=function(){
-        var output=[['Nurse no', 'Nurse name', 'Ward no', 'Ward allocated']];
+        let output=[['Nurse no', 'Nurse name', 'Ward no', 'Ward allocated']];
         for(let i=0;i<nurseNames.length;i++){
             output[i+1]=[i+1,nurseNames[i],nurses[i].allotment,wardNames[nurses[i].allotment]];
             
@@ -35,14 +46,46 @@ var saveData=function(){
     };
     buttonsDiv.appendChild(savebutton);
 
-    // PRINT SCHEDULE as PDF
+    // PRINT PDF BUTTON
     tablePrintButton=document.createElement("button");
     tablePrintButton.onclick=function(){PrintElem("saveTableDiv")};
     tablePrintButton.innerText="Print PDF";
-    
     buttonsDiv.appendChild(tablePrintButton);
+
+
+
+
+    // ADD BUTTONS DIV TO COLUMN1
     column1.appendChild(buttonsDiv);
     
+    
+    // AUTOSAVE CHECKBOX
+    let AutosaveDiv= document.createElement("div");
+    AutosaveDiv.classList.add("autosaveDiv");
+        //   <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">  <label for="vehicle1"> I have a bike</label><br></br>
+    let inputElem = document.createElement("input")
+    inputElem.type="checkbox"
+    inputElem.id="autosave"
+    inputElem.checked = false;
+    inputElem.oninput = ()=>{
+        let autosaveBtn = document.getElementById("autosave")
+        if(autosaveBtn.checked ===true){
+        autosaveToggle = true;
+        console.log("Autosave:on");
+        }
+        else{
+            autosaveToggle = false;
+            console.log("Autosave; off");
+        }
+    };
+    labelElem=document.createElement("label")
+    labelElem.for = "autosave";
+    labelElem.innerText = "Autosave on exit:"
+    AutosaveDiv.appendChild(labelElem)
+    AutosaveDiv.appendChild(inputElem)
+
+    
+    column1.appendChild(AutosaveDiv);
 
     // PRINT DATA TABLE ON SCREEN
     print_table();
@@ -56,8 +99,8 @@ var saveData=function(){
     
     
     // creating HTML elements for content
-    var column2=document.getElementById("column2")
-    column2.innerHTML="Sidebar <br>";
+    // var column2=document.getElementById("column2")
+    // column2.innerHTML="Sidebar <br>";
     var sidebar=document.createElement("div");
     sidebar.id="sidebar";
     sidebar.innerHTML="";

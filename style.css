@@ -168,12 +168,6 @@ nav button {
 }
 
 
-
-
-
-
-
-
 .contentdiv {
   /* min-width: 20%;
   max-width:90%; */
@@ -362,3 +356,14 @@ input{
   font-size: 1rem;
 }
 
+.autosaveDiv{
+  display:flex;
+  justify-content: center;
+  align-items:center;
+
+}
+
+.autosaveDiv>input{
+  width:auto;
+  margin:.5rem;
+}
