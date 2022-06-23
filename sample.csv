@@ -1,0 +1,24 @@
+Nurse no,Nurse name,Ward no,Ward allocated
+1,Albert,1,WARD I 
+2,Emma,2,WARD II 
+3,Luke,3,WARD III 
+4,Max,4,ICU 
+5,Pierre,5,NICU
+6,Sean,6,COVID I
+7,Mohammed,1,WARD I 
+8,Nirmal,2,WARD II 
+9,Alice,3,WARD III 
+10,Bob,4,ICU 
+11,Raj,5,NICU
+12,Seetha,6,COVID I
+13,Dolica,1,WARD I 
+14,Helena,2,WARD II 
+15,Alfaruqi,3,WARD III 
+16,Wessel,4,ICU 
+17,Jordan,5,NICU
+18,Emily,6,COVID I
+19,Davide,1,WARD I 
+20,Camila,2,WARD II 
+21,Lynette,3,WARD III 
+22,Hadi,0,NONE 
+23,Alex,0,NONE
