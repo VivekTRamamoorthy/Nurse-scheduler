@@ -15,8 +15,7 @@ var saveData=function(){
         </div>
     </div>
     <h2>Save as CSV </h2> 
-
-    <br>`;
+    `;
     column1.innerHTML=textHTML;
     let column2=document.getElementById("column2");
     
@@ -25,13 +24,26 @@ var saveData=function(){
     column2.hidden=true;
     // column2.style="width:25%";
     
+    
+    // AUTOSAVE CHECKBOX CONTROLS
+    let checkbox = document.getElementById("autosave")
+    checkbox.oninput = ()=>{
+        let autosaveBtn = document.getElementById("autosave")
+        if(autosaveBtn.checked ===true){
+            autosaveToggle = true;
+            console.log("Autosave:on");
+        }
+        else{
+            autosaveToggle = false;
+            console.log("Autosave; off");
+        }
+    };
 
     // BUTTONS DIV
     let buttonsDiv= document.createElement("div");
     buttonsDiv.classList.add("buttonsDiv");
 
 
-    
     // DOWNLOAD CSV BUTTON
     let savebutton=document.createElement('button');
     savebutton.innerText="Save CSV";
@@ -54,33 +66,16 @@ var saveData=function(){
 
 
 
-
     // ADD BUTTONS DIV TO COLUMN1
     column1.appendChild(buttonsDiv);
     
     
-    // AUTOSAVE CHECKBOX CONTROLS
-    let checkbox = document.getElementById("autosave")
-    checkbox.oninput = ()=>{
-        let autosaveBtn = document.getElementById("autosave")
-        if(autosaveBtn.checked ===true){
-        autosaveToggle = true;
-        console.log("Autosave:on");
-        }
-        else{
-            autosaveToggle = false;
-            console.log("Autosave; off");
-        }
-    };
     
     // PRINT DATA TABLE ON SCREEN
     print_table();
     
 
-    //GAP
-    var gap=document.createElement("div");
-    gap.innerHTML="<br><br>"
-    column1.appendChild(gap);
+
     
     
     
@@ -93,11 +88,7 @@ var saveData=function(){
     column2.appendChild(sidebar);
     
     
-    //GAP
-    var gap=document.createElement("div");
-    gap.innerHTML="<br><br>"
-    column1.appendChild(gap);
-   
+  
     
 }
 
