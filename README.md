@@ -1,4 +1,4 @@
-# Nurse Scheduler
+# [Nurse Scheduler](https://VivekTRamamoorthy.github.io/NurseScheduler)
 This is a web interface for manual nurse scheduling. This does not solve the nurse-scheduling problem in computer science. It was created to simplify tasks for my mother who is a head nurse at a hospital. 
 
 
